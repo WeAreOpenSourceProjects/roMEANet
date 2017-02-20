@@ -44,7 +44,8 @@
           }
         },
         data: {
-          ignoreState: true
+          ignoreState: true,
+          pageTitle: 'Not Found'
         }
       })
       .state('bad-request', {
@@ -58,7 +59,8 @@
           }
         },
         data: {
-          ignoreState: true
+          ignoreState: true,
+          pageTitle: 'Bad Request'
         }
       })
       .state('forbidden', {

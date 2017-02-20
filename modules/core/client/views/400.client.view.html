@@ -1,8 +1,9 @@
-<div class="lost">
-  <h1 class="center-align"><b>Bad Request</b></h1>
-  <h3 class="center-align">
-    <i class="fa fa-exclamation"></i>
-    <span ng-if="vm.errorMessage" ng-bind="vm.errorMessage"></span>
-    <span ng-if="!vm.errorMessage">You made a bad request</span>
-  </h3>
+<div class="page-header">
+  <h1>Bad Request</h1>
+</div>
+<div class="alert alert-danger" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>
+  <span ng-if="vm.errorMessage" ng-bind="vm.errorMessage"></span>
+  <span ng-if="!vm.errorMessage">You made a bad request</span>
 </div>
