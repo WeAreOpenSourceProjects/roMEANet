@@ -54,7 +54,7 @@
         'A700': '273e56',
         'SIDENAVLIGHT': '2b333d',
         'SIDENAVDARK': '333c47',
-        'TOPNAV': 'ffffff',
+        'TOPNAV': 'ffffff'
       });
 
       $mdThemingProvider.theme('default')
