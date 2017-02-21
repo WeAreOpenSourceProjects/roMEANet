@@ -22,7 +22,8 @@ cache:
   - node_modules
   - public/dist
 before_install:
-- openssl aes-256-cbc -K $encrypted_6729f53900bc_key -iv $encrypted_6729f53900bc_iv -in deploy_key.enc -out ~\/.ssh/deploy_key -d
+- openssl aes-256-cbc -K $encrypted_6729f53900bc_key -iv $encrypted_6729f53900bc_iv
+  -in deploy_key.enc -out deploy_key -d
 - gem update --system
 - gem install sass --version "=3.3.7"
 - npm i nsp -g
