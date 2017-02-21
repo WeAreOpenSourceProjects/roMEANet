@@ -51,7 +51,7 @@ deploy:
 - provider: script
   skip_cleanup: true
   script: ssh -p $SSH_PORT $USER@$SERVER -o StrictHostKeyChecking=no "cd $DEPLOY_PATH
-    && gulp WeaosProd"
+    && gulp WeaosProd && pm2 restart all"
   on:
     branch: master
 notifications:
