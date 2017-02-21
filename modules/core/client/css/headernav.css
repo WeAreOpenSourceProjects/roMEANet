@@ -2,21 +2,20 @@
  * Navbar
  */
 
-.header nav.top{
-  background-color: #fff;
-  border-bottom: 1px solid #dddddd;
+.header nav.top {
+  border-bottom: 1px solid #ddd;
   height: 50px !important;
   line-height: 50px !important;
   margin-bottom: 20px;
   padding: 0 1.25rem;
-  position:fixed;
-  right:0;
+  position: fixed;
+  right: 0;
   width: 100%;
   z-index: 48;
 }
 
-.header nav.top .topTitle a, .header nav.top .topTitle span {
-  color: #4c4e54;
+.header nav.top .topTitle a,
+.header nav.top .topTitle span {
   font-size: 24px;
 }
 
@@ -27,7 +26,7 @@
 }
 
 .header nav.top ul.right {
-  float:right;
+  float: right;
 }
 
 .header nav.top ul li {
@@ -40,7 +39,6 @@
 }
 
 .header nav.top ul li a {
-  color: #2c3e50;
   cursor: pointer;
   display: block;
   font-size: 1rem;
@@ -50,5 +48,5 @@
 
 .header nav.top ul a:hover {
   background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0,0,0,.1);
 }

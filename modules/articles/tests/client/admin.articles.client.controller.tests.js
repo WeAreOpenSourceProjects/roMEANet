@@ -9,7 +9,8 @@
       $state,
       Authentication,
       ArticlesService,
-      mockArticle;
+      mockArticle,
+      $mdToast;
 
     // The $resource service augments the response object with methods for updating and deleting the resource.
     // If we were to use the standard toEqual matcher, our tests would fail because the test values would not match
@@ -36,7 +37,7 @@
     // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
     // This allows us to inject a service but then attach it to a variable
     // with the same name as the service.
-    beforeEach(inject(function($controller, $rootScope, _$state_, _$httpBackend_, _Authentication_, _ArticlesService_) {
+    beforeEach(inject(function($controller, $rootScope, _$state_, _$httpBackend_, _Authentication_, _ArticlesService_, _$mdToast_) {
       // Set a new global scope
       $scope = $rootScope.$new();
 
@@ -45,6 +46,7 @@
       $state = _$state_;
       Authentication = _Authentication_;
       ArticlesService = _ArticlesService_;
+      $mdToast = _$mdToast_;
 
       // Ignore parent template get on state transitions
       $httpBackend.whenGET('/modules/core/client/views/home.client.view.html').respond(200, '');
@@ -71,6 +73,7 @@
 
       // Spy on state go
       spyOn($state, 'go');
+      spyOn($mdToast, 'show');
     }));
 
     describe('vm.save() as create', function() {
@@ -107,7 +110,7 @@
         $scope.vm.save(true);
         $httpBackend.flush();
 
-        expect($scope.vm.error).toBe(errorMessage);
+        expect($mdToast.show).toHaveBeenCalledWith($mdToast.simple().textContent('Article save error ! ' + errorMessage).position('top right').hideDelay(5000));
       });
     });
 
@@ -138,7 +141,7 @@
         $scope.vm.save(true);
         $httpBackend.flush();
 
-        expect($scope.vm.error).toBe(errorMessage);
+        expect($mdToast.show).toHaveBeenCalledWith($mdToast.simple().textContent('Article save error ! ' + errorMessage).position('top right').hideDelay(5000));
       }));
     });
 

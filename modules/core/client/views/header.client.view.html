@@ -1,5 +1,5 @@
 <div class="header" ng-controller="HeaderController as vm">
-  <nav class="top">
+  <nav class="top" md-colors="{background: 'background-TOPNAV', color: 'primary-50'}">
     <div class="nav-wrapper">
       <ul class="left inline-block topTitle">
         <span kind="header" page-title></span>
@@ -7,25 +7,25 @@
       <ul class="right">
         <!-- Nav user -->
         <li ng-show="vm.authentication.user" class="item">
-          <a tooltipped href="#" ng-click="vm.authentication.signout();" data-position="bottom" data-delay="550" data-tooltip="Sign out"><i class="fa fa-sign-out red-text text-darken-4"></i></a>
+          <a tooltipped href="#" ng-click="vm.authentication.signout();" data-position="bottom" data-delay="550" data-tooltip="Sign out"><i class="fa fa-sign-out red-text text-darken-4" md-colors="{color: 'primary-500'}" ></i></a>
         </li>
         <!-- Nav default Simulation -->
         <li ng-hide="vm.authentication.user" class="item">
-          <a ui-sref="authentication.signin"><i class="fa fa-sign-in green-text text-darken-3"></i></a>
+          <a ui-sref="authentication.signin"><i class="fa fa-sign-in green-text text-darken-3" md-colors="{color: 'primary-500'}" ></i></a>
         </li>
       </ul>
       <ul class="right" ng-if="vm.nav.shouldRender(vm.authentication.user);">
         <li ng-repeat="item in vm.nav.items | orderBy: 'position'" ng-if="item.shouldRender(vm.authentication.user);" ng-switch="item.type" ng-class="{ active: $state.includes(item.state), drop: item.type === 'dropdown' }" class="item {{item.class}}"
             drop="item.type">
           <!-- if Dropdown  -->
-          <a ng-switch-when="dropdown" class='dropdown-button' data-activates="{{item.state}}" dropdown><i class="fa {{item.icon}}"></i></a>
+          <a ng-switch-when="dropdown" class='dropdown-button' data-activates="{{item.state}}"  md-colors="{color: 'primary-500'}" dropdown><i class="fa {{item.icon}}"></i></a>
           <ul ng-switch-when="dropdown" id="{{item.state}}" class='dropdown-content'>
             <li ng-repeat="subitem in item.items | orderBy: 'position'" ng-if="subitem.shouldRender(authentication.user);" ui-sref-active="active">
               <a ui-sref="{{subitem.state}}" ng-bind="subitem.title"></a>
             </li>
           </ul>
           <!-- else  -->
-          <a tooltipped ng-switch-default ui-sref="{{item.state}}" data-position="bottom" data-delay="550" data-tooltip="{{item.title}}"><i class="fa {{item.icon}}"></i></a>
+          <a tooltipped ng-switch-default ui-sref="{{item.state}}" data-position="bottom" data-delay="550" data-tooltip="{{item.title}}" md-colors="{color: 'primary-500'}" ><i class="fa {{item.icon}}"></i></a>
         </li>
       </ul>
     </div>

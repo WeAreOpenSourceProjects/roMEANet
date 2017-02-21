@@ -16,28 +16,52 @@
       cfpLoadingBarProvider.loadingBarTemplate = '<div id="loading-bar"><div class="loading-bar bar"><div class="peg"></div></div></div>';
     }])
     .config(function($mdThemingProvider) {
+
       $mdThemingProvider.definePalette('roMEANetPalette', {
-        '50': 'a3b3c3',
-        '100': '8a9cae',
-        '200': '75899d',
-        '300': '5f768c',
-        '400': '4b6278',
-        '500': '34495e',
-        '600': '2c3e50',
-        '700': 'd32f2f',
-        '800': '213447',
-        '900': '192e42',
-        'A100': '9c9c9c',
-        'A200': '6f6f6f',
-        'A400': '364554',
+        '50': '333333',
+        '100': '2f2f2f',
+        '200': '2a2a2a',
+        '300': '222222',
+        '400': '1f1f1f',
+        '500': '1a1a1a',
+        '600': '111111',
+        '700': '0f0f0f',
+        '800': '0a0a0a',
+        '900': '000000',
+        'A100': 'e4e4e4',
+        'A200': '222222',
+        'A400': '0f0f0f',
         'A700': '273e56',
         'contrastDefaultColor': 'light', // whether, by default, text (contrast) on this palette should be dark or light
         'contrastDarkColors': ['50', '100', '200', '300', '400', 'A100'], // hues which contrast should be 'dark' by default
         'contrastLightColors': undefined // could also specify this if default was 'dark'
       });
+
+      $mdThemingProvider.definePalette('roMEANetBackgroundPalette', {
+        '50': 'f9f9f9',
+        '100': 'f4f4f4',
+        '200': 'e9e9e9',
+        '300': 'e4e4e4',
+        '400': 'd9d9d9',
+        '500': 'd4d4d4',
+        '600': 'c9c9c9',
+        '700': 'c4c4c4',
+        '800': 'b9b9b9',
+        '900': 'b4b4b4',
+        'A100': 'e4e4e4',
+        'A200': '222222',
+        'A400': '0f0f0f',
+        'A700': '273e56',
+        'SIDENAVLIGHT': '2b333d',
+        'SIDENAVDARK': '333c47',
+        'TOPNAV': 'ffffff'
+      });
+
       $mdThemingProvider.theme('default')
         .primaryPalette('roMEANetPalette')
-        .accentPalette('roMEANetPalette');
+        .accentPalette('roMEANetPalette')
+        .backgroundPalette('roMEANetBackgroundPalette');
+
     });
 
   function bootstrapConfig($compileProvider, $locationProvider, $httpProvider, $logProvider) {

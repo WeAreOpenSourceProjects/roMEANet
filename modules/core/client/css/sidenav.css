@@ -4,12 +4,17 @@
 
 
 /* animation */
-.wrapper, .sidenav,  .nav-wrapper, .head, .foot, .user {
-  -moz-transition: all 0.3s ease;
-  -ms-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
+.wrapper,
+.sidenav,
+.nav-wrapper,
+.head,
+.foot,
+.user {
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
 }
 
 /* normal */
@@ -18,7 +23,6 @@
   padding-left: 60px;
 }
 .sidenav {
-  background: #2b333d;
   height: 100%;
   margin-left: -60px;
   overflow-x: hidden;
@@ -60,23 +64,21 @@
 
 /* design */
 .sidenav .sidebar-nav .head {
-  background: #333c47;
-  height:50px;
+  height: 50px;
   padding: 0 0 0 0;
-  width:250px;
+  width: 250px;
 }
 .wrapper.toggled .sidebar-nav .head {
   padding: 0 10px 0 10px;
 }
 
 .sidenav .sidebar-nav .user {
-  background: #2b333d;
   bottom: 50px;
-  height:60px;
+  height: 60px;
   line-height: 50px;
   padding: 0 0 0 0;
-  position:absolute;
-  width:100%;
+  position: absolute;
+  width: 100%;
 }
 .wrapper.toggled .sidebar-nav .user {
   padding: 0 10px 0 10px;
@@ -86,7 +88,6 @@
   text-decoration: none;
 }
 .sidenav .sidebar-nav .user .image {
-  background: #7f8c8d;
   border-radius: 50%;
   height: 36px;
   margin: 12px 5px 12px 12px;
@@ -96,40 +97,89 @@
 }
 
 .sidenav .sidebar-nav .user:hover {
-background-color: #24272d;
+  background-color: #24272d;
 }
 
 .sidenav .sidebar-nav .foot {
-  background: #333c47;
   bottom: 0;
-  height:50px;
+  height: 50px;
   line-height: 50px;
-  position:absolute;
+  position: absolute;
   text-align: center;
-  width:100%;
+  width: 100%;
 }
 
-.dropdown-toggle { color:#fff; cursor: pointer; display: block; height: 100%;width: 100%;}
+.dropdown-toggle {
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
 
-.sidenav .sidebar {max-height: calc(100vh - 180px); overflow-x: hidden;overflow-y: auto;  top: 0 !important; }
-.sidenav .sidebar .fa { margin-right: 30px }
-.sidenav .sidebar .sidebar-nav.navbar-collapse { padding-left: 0; padding-right: 0 }
-.sidenav .sidebar ul { padding: 0;}
-.sidenav .sidebar ul li { display: block; position: relative;width: auto;}
-.sidenav .sidebar ul li a { color: #c5d0de; display: block; padding: 10px 20px 10px 20px;}
-.sidenav .sidebar ul li a.active,.sidebar ul li a:hover { background-color: #24272d; color: #fff;}
-.sidenav .sidebar .arrow { float: right }
-.sidenav .sidebar .fa.arrow:before { content: "\f104" }
-.sidenav .sidebar .active>a>.fa.arrow:before { content: "\f107" }
+.sidenav .sidebar {
+  max-height: calc(100vh - 180px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  top: 0 !important;
+}
+.sidenav .sidebar .fa {
+  margin-right: 30px;
+}
+.sidenav .sidebar .sidebar-nav.navbar-collapse {
+  padding-left: 0;
+  padding-right: 0;
+}
+.sidenav .sidebar ul {
+  padding: 0;
+}
+.sidenav .sidebar ul li {
+  display: block;
+  position: relative;
+  width: auto;
+}
+.sidenav .sidebar ul li a {
+  color: #c5d0de;
+  display: block;
+  padding: 10px 20px 10px 20px;
+}
+.sidenav .sidebar ul li a.active,
+.sidebar ul li a:hover {
+  background-color: #24272d;
+  color: #fff;
+}
+.sidenav .sidebar .arrow {
+  float: right;
+}
+.sidenav .sidebar .fa.arrow:before {
+  content: '\f104';
+}
+.sidenav .sidebar .active > a > .fa.arrow:before {
+  content: '\f107';
+}
 .sidenav .sidebar .nav-second-level li,
-.sidenav .sidebar .nav-third-level li { border-bottom: 0 !important }
-.sidenav .sidebar .nav-second-level li a { padding-left: 37px }
-.sidenav .sidebar .nav-third-level li a { padding-left: 52px }
-.sidenav .sidebar ul li a span {display: none;}
-.sidenav .sidebar ul li a {width: 250px;}
+.sidenav .sidebar .nav-third-level li {
+  border-bottom: 0 !important;
+}
+.sidenav .sidebar .nav-second-level li a {
+  padding-left: 37px;
+}
+.sidenav .sidebar .nav-third-level li a {
+  padding-left: 52px;
+}
+.sidenav .sidebar ul li a span {
+  display: none;
+}
+.sidenav .sidebar ul li a {
+  width: 250px;
+}
 
-.wrapper.toggled .sidebar ul li {width: 250px;}
-.wrapper.toggled .sidebar ul li a {width: 250px;}
+.wrapper.toggled .sidebar ul li {
+  width: 250px;
+}
+.wrapper.toggled .sidebar ul li a {
+  width: 250px;
+}
 
 /* design */
 .head span {
@@ -145,7 +195,8 @@ background-color: #24272d;
   margin-top: 3px;
 }
 
-.logo, .logo:hover {
+.logo,
+.logo:hover {
   background: transparent;
   float: left;
   margin: 8px 5px 5px 5px;
@@ -153,6 +204,5 @@ background-color: #24272d;
 }
 
 .logo .shape:hover {
-  stroke: #bdc3c7;
-  transition: all 0.2s;
+  transition: all .2s;
 }
