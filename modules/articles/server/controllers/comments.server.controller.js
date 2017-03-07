@@ -10,13 +10,14 @@ var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
- * Create an article
+ * Create an comment
  */
 exports.create = function(req, res) {
-  var article = new Article(req.body);
-  console.log("create article", article);
-  article.user = req.user;
-
+  console.log("creating comment..");
+  var comment = new Comment(req.body);
+  comment.user = req.user;
+  var article = req.article;
+  article.comments.push(comment);
   article.save(function(err) {
     if (err) {
       return res.status(422).send({
@@ -32,27 +33,27 @@ exports.create = function(req, res) {
  * Show the current article
  */
 exports.read = function(req, res) {
+  console.log("reading comment");
   // convert mongoose document to JSON
-  var article = req.article ? req.article.toJSON() : {};
+  console.log(req.params);
+  console.log(req.article.comments.id(req.commentID));
+  var comment = req.article.comments.id(req.commentID) ? req.article.comments.id(req.commentID).toJSON() : {};
+  console.log("comment is:", comment);
+  // Add a custom field to the comment, for determining if the current User is the "owner".
+  // NOTE: This field is NOT persisted to the database, since it doesn't exist in the comment model.
+  comment.isCurrentUserOwner = !!(req.user && comment.user && comment.user._id.toString() === req.user._id.toString());
 
-  // Add a custom field to the Article, for determining if the current User is the "owner".
-  // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
-  article.isCurrentUserOwner = !!(req.user && article.user && article.user._id.toString() === req.user._id.toString());
-
-  res.json(article);
+  res.json(comment);
 };
 
 /**
- * Update an article, in case that add comment
+ * Update an comment, in case that add comment
  */
 exports.update = function(req, res) {
+  console.log("updating comment");
   var article = req.article;
-  var comment = new Comment();
-  article.title = req.body.title;
-  article.content = req.body.content;
-  comment.user = req.user;
-  comment.body = req.body.comments[0].body;
-  article.comments.push(comment);
+  article.comments.id(req.commentID).body = req.body.body;
+  console.log("request body:",req.body);
   article.save(function(err) {
     if (err) {
       return res.status(422).send({
@@ -69,14 +70,23 @@ exports.update = function(req, res) {
  * Delete an article
  */
 exports.delete = function(req, res) {
+  console.log("deleting comment");
   var article = req.article;
-  article.remove(function(err) {
+  article.comments.id(req.commentID).remove(function(err) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.json(article);
+      article.save(function(err) {
+        if (err) {
+          return res.status(422).send({
+            message: errorHandler.getErrorMessage(err)
+          });
+        } else {
+          res.json(article);
+        }
+      });
     }
   });
 };
@@ -97,26 +107,28 @@ exports.list = function(req, res) {
 };
 
 /**
- * Article middleware
+ * Comment middleware
  */
-exports.articleByID = function(req, res, next, id) {
-  console.log("article by id");
+exports.commentByID = function(req, res, next, id) {
+  console.log("finding comment");
+  console.log("id", id);
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
-      message: 'Article is invalid'
+      message: 'comment is invalid'
     });
   }
-
-  Article.findById(id).populate('user comments.user', 'displayName').exec(function(err, article) {
+  Article.findOne({
+    "comments._id": id
+  }).populate('comments.user', 'displayName').exec(function(err, article) {
     if (err) {
       return next(err);
     } else if (!article) {
       return res.status(404).send({
-        message: 'No article with that identifier has been found'
+        message: 'No comment with that identifier has been found'
       });
     }
     req.article = article;
-
+    req.commentID = id;
     next();
   });
 };

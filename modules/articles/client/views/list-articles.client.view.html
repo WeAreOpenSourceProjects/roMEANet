@@ -19,15 +19,21 @@
         </div>
       </md-subheader>
       <md-divider></md-divider>
-      <md-list-item class="md-2-line md-long-text" dir-paginate="article in vm.articles | filter: vm.search | itemsPerPage: vm.itemsPerPage" pagination-id="articles" ui-sref="articles.view({articleId: article._id})">
-        <!--<img ng-src="{{article.user.profileImageURL}}" class="md-avatar" alt="{{article.user.displayName}}" />-->
-        <div class="md-list-item-text">
-          <b ng-bind="article.title"></b> <small>Posted on <span ng-bind="article.created | date:'mediumDate'"></span> by <span ng-if="article.user" ng-bind="article.user.displayName"></span><span ng-if="!article.user">Deleted User</span></small>
-          <p ng-bind-html="article.content"></p>
-        </div>
-      </md-list-item>
-      <md-divider></md-divider>
-      <dir-pagination-controls boundary-links="true" template-url="/modules/core/client/templates/pagination.html" pagination-id="articles"></dir-pagination-controls>
+      <md-list dir-paginate="article in vm.articles | filter: vm.search | itemsPerPage: vm.itemsPerPage" pagination-id="articles">
+        <md-list-item class="md-3-line md-long-text" ui-sref="articles.view({articleId: article._id})">
+          <!--<img ng-src="{{article.user.profileImageURL}}" class="md-avatar" alt="{{article.user.displayName}}" />-->
+          <div class="md-list-item-text">
+            <b ng-bind="article.title"></b> <small>Posted on <span ng-bind="article.created | date:'mediumDate'"></span> by <span ng-if="article.user" ng-bind="article.user.displayName"></span><span ng-if="!article.user">Deleted User</span></small>
+            <p ng-bind-html="article.content"></p>
+          </div>
+        </md-list-item>
+        <comment-block article='article'></comment-block>
+
+        <dir-pagination-controls boundary-links="true" template-url="/modules/core/client/templates/pagination.html" pagination-id="articles"></dir-pagination-controls>
+  <md-divider></md-divider>
+      </md-list>
+
     </md-list>
+
   </md-content>
 </section>

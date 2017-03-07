@@ -28,7 +28,10 @@ exports.invokeRolesPolicies = function () {
       permissions: ['get']
     }, {
       resources: '/api/articles/:articleId',
-      permissions: ['get']
+      permissions: ['get','put','post']
+    }, {
+      resources: '/api/articles/:articleId/comments/:commentId',
+      permissions: ['get','put','post','delete']
     }]
   }, {
     roles: ['guest'],

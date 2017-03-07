@@ -1,0 +1,22 @@
+.article-comment-box{
+  position: relative;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.input-comment-box{
+  display: none;
+}
+.danger{
+  color:red;
+  cursor: pointer;
+}
+.danger:hover{
+  color:darkred;
+}
+.blue{
+  color:cornflowerblue;
+  cursor: pointer;
+}
+.blue:hover{
+  color:darkblue;
+}
