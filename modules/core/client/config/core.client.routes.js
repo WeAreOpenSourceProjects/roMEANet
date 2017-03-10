@@ -33,6 +33,11 @@
         controller: 'HomeController',
         controllerAs: 'vm'
       })
+      .state('toolbox', {
+        abstract: true,
+        url: '/toolbox',
+        template: '<ui-view/>'
+      })
       .state('not-found', {
         url: '/not-found',
         templateUrl: '/modules/core/client/views/404.client.view.html',

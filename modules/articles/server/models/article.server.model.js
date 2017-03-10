@@ -28,37 +28,7 @@ var ArticleSchema = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'User'
-  },
-  comments: [{
-    body: {
-      type: String,
-      default: '',
-      trim: true
-    },
-    user: {
-      type: Schema.ObjectId,
-      ref: 'User'
-    },
-    created: {
-      type: Date,
-      default: Date.now
-    }
-  }]
-});
-var CommentSchema = new Schema({
-  body: {
-    type: String,
-    default: '',
-    trim: true
-  },
-  user: {
-    type: Schema.ObjectId,
-    ref: 'User'
-  },
-  created: {
-    type: Date,
-    default: Date.now
   }
-})
-mongoose.model('Comment', CommentSchema);
+});
+
 mongoose.model('Article', ArticleSchema);

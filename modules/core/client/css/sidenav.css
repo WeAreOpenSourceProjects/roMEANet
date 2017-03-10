@@ -9,7 +9,10 @@
 .nav-wrapper,
 .head,
 .foot,
-.user {
+.user,
+.content,
+.header nav.top,
+.toggle-mask {
   -webkit-transition: all .3s ease;
   -moz-transition: all .3s ease;
   -ms-transition: all .3s ease;
@@ -20,11 +23,10 @@
 /* normal */
 .wrapper {
   background: #f9f9f9;
-  padding-left: 60px;
 }
 .sidenav {
   height: 100%;
-  margin-left: -60px;
+  margin-left: -120px;
   overflow-x: hidden;
   overflow-y: auto;
   position: fixed;
@@ -32,8 +34,8 @@
   width: 60px;
   z-index: 49;
 }
-.nav-wrapper {
-  padding-left: 60px;
+.header {
+  padding-left: 0px;
 }
 .sidebar-nav {
   list-style: none;
@@ -42,18 +44,42 @@
 .wrapper .sidebar-nav span {
   display: none;
 }
-
-/* toggled */
-.wrapper.toggled {
-  padding-left: 250px;
+.toggle-mask{
+  height: 100%;
+  width: 100%;
+  z-index: 48;
+  background-color: grey;
+  opacity: 0.6;
+  position: absolute;
+  display: none;
 }
+.toggle-left-btn{
+  display: block;
+}
+/* Toggle left */
+.wrapper.toggled .toggle-mask{
+    display: block;
+}
+
+.wrapper.toggled{
+  overflow: hidden;
+}
+.wrapper.toggled .content{
+ transform: translateX(250px);
+}
+.wrapper.toggled .header nav.top{
+  transform: translateX(250px);
+}
+
+.wrapper.toggled .content{
+  height: 100%;
+}
+
 .wrapper.toggled .sidenav {
-  margin-left: -250px;
+  margin-left: 0px;
   width: 250px;
 }
-.wrapper.toggled .nav-wrapper {
-  padding-left: 250px;
-}
+
 .wrapper.toggled .sidebar-nav {
   width: 250px;
 }
@@ -61,7 +87,33 @@
   display: inline;
   opacity: 1;
 }
+@media only screen and (min-width: 768px){
+  .wrapper{
+    padding-left: 60px;
+  }
+  .sidenav {
+   margin-left: -60px;
+ }
+  .toggle-left-btn{
+    display: none;
+  }
+  /* Toggle in normal screen*/
+  .wrapper.toggled{
+    padding-left: 0px;
+  }
+  .wrapper.toggled .toggle-mask{
+      display: none;
+  }
+  .wrapper.toggled .content{
+   transform: none;
+   padding-left: 250px;
+  }
+  .wrapper.toggled .header nav.top{
+    transform: none;
+    padding-left: 210px;
+  }
 
+}
 /* design */
 .sidenav .sidebar-nav .head {
   height: 50px;
@@ -83,6 +135,7 @@
 .wrapper.toggled .sidebar-nav .user {
   padding: 0 10px 0 10px;
 }
+
 .sidenav .sidebar-nav .user a {
   color: #fff;
   text-decoration: none;

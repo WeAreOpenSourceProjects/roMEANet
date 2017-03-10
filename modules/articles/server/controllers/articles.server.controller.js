@@ -6,18 +6,16 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Article = mongoose.model('Article'),
-  Comment = mongoose.model('Comment'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
  * Create an article
  */
-exports.create = function(req, res) {
+exports.create = function (req, res) {
   var article = new Article(req.body);
-  console.log("create article", article);
   article.user = req.user;
 
-  article.save(function(err) {
+  article.save(function (err) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
@@ -31,7 +29,7 @@ exports.create = function(req, res) {
 /**
  * Show the current article
  */
-exports.read = function(req, res) {
+exports.read = function (req, res) {
   // convert mongoose document to JSON
   var article = req.article ? req.article.toJSON() : {};
 
@@ -43,17 +41,15 @@ exports.read = function(req, res) {
 };
 
 /**
- * Update an article, in case that add comment
+ * Update an article
  */
-exports.update = function(req, res) {
+exports.update = function (req, res) {
   var article = req.article;
-  var comment = new Comment();
+
   article.title = req.body.title;
   article.content = req.body.content;
-  comment.user = req.user;
-  comment.body = req.body.comments[0].body;
-  article.comments.push(comment);
-  article.save(function(err) {
+
+  article.save(function (err) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
@@ -64,13 +60,13 @@ exports.update = function(req, res) {
   });
 };
 
-
 /**
  * Delete an article
  */
-exports.delete = function(req, res) {
+exports.delete = function (req, res) {
   var article = req.article;
-  article.remove(function(err) {
+
+  article.remove(function (err) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
@@ -84,8 +80,8 @@ exports.delete = function(req, res) {
 /**
  * List of Articles
  */
-exports.list = function(req, res) {
-  Article.find().sort('-created').populate('user comments.user', 'displayName').exec(function(err, articles) {
+exports.list = function (req, res) {
+  Article.find().sort('-created').populate('user', 'displayName').exec(function (err, articles) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
@@ -99,15 +95,15 @@ exports.list = function(req, res) {
 /**
  * Article middleware
  */
-exports.articleByID = function(req, res, next, id) {
-  console.log("article by id");
+exports.articleByID = function (req, res, next, id) {
+
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
       message: 'Article is invalid'
     });
   }
 
-  Article.findById(id).populate('user comments.user', 'displayName').exec(function(err, article) {
+  Article.findById(id).populate('user', 'displayName').exec(function (err, article) {
     if (err) {
       return next(err);
     } else if (!article) {
@@ -116,7 +112,6 @@ exports.articleByID = function(req, res, next, id) {
       });
     }
     req.article = article;
-
     next();
   });
 };

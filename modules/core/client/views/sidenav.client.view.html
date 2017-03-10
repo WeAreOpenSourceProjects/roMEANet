@@ -1,4 +1,4 @@
-<div class="sidenav" ng-controller="SidenavController as vm"  md-colors="{background: 'background-SIDENAVLIGHT'}">
+<div class="sidenav" ng-controller="SidenavController as vm" md-colors="{background: 'background-SIDENAVLIGHT'}">
   <div class="sidebar-nav">
     <div class="head" md-colors="{background: 'background-SIDENAVDARK'}">
       <a ui-sref="home">
@@ -18,7 +18,7 @@
           </ul> -->
           <!-- else  -->
           <div ng-switch-default>
-            <a ng-if="vm.$state.includes(item.state) && item.view == location.view" ui-sref="{{item.state}}" style="background-color: {{item.color}}; color: {{item.fontColor}};"><i class="fa {{item.icon}} fa-fw"></i><span ng-bind="item.title"></span></a>
+            <a ng-click="vm.h()" ng-if="vm.$state.includes(item.state) && item.view == location.view" ui-sref="{{item.state}}" style="background-color: {{item.color}}; color: {{item.fontColor}};"><i class="fa {{item.icon}} fa-fw"></i><span ng-bind="item.title"></span></a>
             <a ng-if="!vm.$state.includes(item.state) && item.view == location.view" ui-sref="{{item.state}}"><i class="fa {{item.icon}} fa-fw"></i><span ng-bind="item.title"></span></a>
           </div>
         </li>
@@ -40,9 +40,8 @@
     </div>
   </div>
 </div>
-
 <script>
-$(".dropdown-toggle").click(function (e) {
-  $(".wrapper").toggleClass("toggled");
-});
+  $(".dropdown-toggle").click(function(e) {
+    $(".wrapper").toggleClass("toggled");
+  });
 </script>
