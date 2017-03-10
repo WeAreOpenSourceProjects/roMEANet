@@ -25,7 +25,7 @@
       </ul>
       <!--normal screen topbar-->
       <ul class="right" ng-if="vm.nav.shouldRender(vm.authentication.user)&&(vm.isNormalScreen||vm.isOpenToolBox)">
-        <li ng-repeat="item in vm.nav.items | orderBy: 'position'" ng-if="item.shouldRender(vm.authentication.user);" ng-switch="item.type" ng-class="{ active: $state.includes(item.state), drop: item.type === 'dropdown' }" class="item {{item.class}}" drop="item.type">
+        <li ng-repeat="item in vm.nav.items | orderBy: 'position'" ng-if="item.shouldRender(vm.authentication.user)" ng-switch="item.type" ng-class="{ active: $state.includes(item.state), drop: item.type === 'dropdown' }" class="item {{item.class}}" drop="item.type">
           <!-- if Dropdown  -->
           <a ng-switch-when="button" class="dropdown-button"><i class="fa {{item.icon}}"></i></a>
           <md-menu ng-switch-when="dropdown-menu">

@@ -24,19 +24,12 @@
     /**
      * Nav Bar Top
      */
-
     Navs.addNavItem('topbar', {
       title: _appAdmin.name,
       icon: _appAdmin.icon,
       state: _appAdmin.state,
+      roles: _appAdmin.roles,
       type: _appAdmin.type
     });
-/*    Navs.addSubNavItem('topbar_mobile', 'toolbox', {
-      title: _appAdmin.name,
-      icon: _appAdmin.icon,
-      state: _appAdmin.state,
-      type: _appAdmin.type,
-      roles: _appAdmin.roles
-    });*/
   }
 }());

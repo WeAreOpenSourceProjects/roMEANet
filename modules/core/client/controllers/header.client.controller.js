@@ -41,5 +41,9 @@
     function openToolBox() {
       vm.isOpenToolBox = vm.isOpenToolBox ? false : true;
     }
+    console.log(vm.nav.items[1]);
+    console.log(vm.authentication.user);
+    console.log(vm.nav.items[0].shouldRender(vm.authentication.user));
+    console.log(vm.nav.items[1].shouldRender(vm.authentication.user));
   }
 }());
