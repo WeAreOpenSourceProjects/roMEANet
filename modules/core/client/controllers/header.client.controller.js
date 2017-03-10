@@ -24,7 +24,6 @@
     $scope.$watch(function() {
       return $mdMedia('(min-width: 768px)');
     }, function() {
-      console.log("screnn size change");
       vm.isNormalScreen = $mdMedia('(min-width: 768px)');
     });
 
@@ -32,7 +31,6 @@
       // Collapsing the sideNavmenu after navigation
       vm.isCollapsed = false;
       if ($(".wrapper").hasClass("toggled")&&!vm.isNormalScreen) {
-        console.log("removing toggle");
         $(".wrapper").removeClass("toggled");
         return false;
       }
@@ -41,9 +39,5 @@
     function openToolBox() {
       vm.isOpenToolBox = vm.isOpenToolBox ? false : true;
     }
-    console.log(vm.nav.items[1]);
-    console.log(vm.authentication.user);
-    console.log(vm.nav.items[0].shouldRender(vm.authentication.user));
-    console.log(vm.nav.items[1].shouldRender(vm.authentication.user));
   }
 }());
