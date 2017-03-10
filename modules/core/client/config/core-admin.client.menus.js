@@ -60,13 +60,7 @@
       roles: _appMobileToolBox.roles,
       type: _appMobileToolBox.type
     });
-  /*  Navs.addSubNavItem('topbar_mobile', 'toolbox', {
-      title: _appAdmin.name,
-      icon: _appAdmin.icon,
-      state: _appAdmin.state,
-      roles: _appAdmin.roles,
-      type: _appAdmin.type
-    });*/
+
     /**
      * Side Bar left
      */

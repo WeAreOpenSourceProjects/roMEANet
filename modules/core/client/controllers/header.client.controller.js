@@ -13,7 +13,6 @@
     vm.authentication = Authentication;
     vm.isCollapsed = false;
     vm.nav = Navs.getNav('topbar');
-    vm.nav_mobile = Navs.getNav('topbar_mobile');
 
     vm.openToolBox = openToolBox; //openToolBox
     vm.isOpenToolBox = false;
