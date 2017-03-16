@@ -233,7 +233,20 @@
 .wrapper.toggled .sidebar ul li a {
   width: 250px;
 }
+/* pin icon*/
+.pin-icon{
+  cursor: pointer;
+  padding: 17px 13px;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  color: #c5d0de;
+}
+.pin-icon:hover{
+  color: white;
+  background-color: rgba(0,0,0,.1);
 
+}
 /* design */
 .head span {
   display: block;

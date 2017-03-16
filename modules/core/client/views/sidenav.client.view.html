@@ -4,6 +4,8 @@
       <a ui-sref="home">
         <img src="/modules/core/client/img/brand/logo-white.png" width="50px" class="logo"></img>
         <span style="font-size:28px; color:#fff;">roMEANet</span>
+        <a class="right pin-icon" ng-click="vm.changePinStatus()" ng-show="vm.isNormalScreen&&vm.sideNavLock"><i class=" fa fa-lock fa-fw"></i></a>
+        <a class="right pin-icon" ng-click="vm.changePinStatus()" ng-show="vm.isNormalScreen&&!vm.sideNavLock"><i class=" fa fa-unlock fa-fw"></i></a>
       </a>
     </div>
     <div class="sidebar">
@@ -40,8 +42,3 @@
     </div>
   </div>
 </div>
-<script>
-  $(".dropdown-toggle").click(function(e) {
-    $(".wrapper").toggleClass("toggled");
-  });
-</script>
