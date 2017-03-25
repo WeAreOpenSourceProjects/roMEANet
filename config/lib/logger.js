@@ -79,6 +79,8 @@ logger.getLogOptions = function getLogOptions() {
   if (!_.has(_config, 'log.fileLogger.directoryPath') || !_.has(_config, 'log.fileLogger.fileName')) {
     console.log('unable to find logging file configuration');
     return false;
+  } else if (!fs.existsSync(configFileLogger.directoryPath)) {
+    fs.mkdirSync(configFileLogger.directoryPath);
   }
 
   var logPath = configFileLogger.directoryPath + '/' + configFileLogger.fileName;
