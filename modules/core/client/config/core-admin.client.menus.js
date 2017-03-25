@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -26,14 +26,15 @@
       name: 'ToolBox',
       version: '1.0.0',
       state: 'toolbox', // main route
-      //view: 'home',
+      // view: 'home',
       icon: 'fa-cog', // https://fortawesome.github.io/Font-Awesome/
       color: '#24272d', // https://flatuicolors.com/ (sideNav)
       fontColor: '#fff', // https://flatuicolors.com/ (sideNav)
-    //  type: 'dropdown-menu',
-    //  position: 0, // default 1
+      //  type: 'dropdown-menu',
+      //  position: 0, // default 1
       roles: ['*']
-    }
+    };
+
     var _appAdmin = {
       name: 'Admin',
       version: '1.0.0',

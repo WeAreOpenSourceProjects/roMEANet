@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -7,7 +7,7 @@
 
   SidenavController.$inject = ['$scope', '$state', 'Authentication', 'sideNavs', '$mdMedia'];
 
-  function SidenavController($scope, $state, Authentication, sideNavs ,$mdMedia) {
+  function SidenavController($scope, $state, Authentication, sideNavs, $mdMedia) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -19,69 +19,70 @@
     init();
 
     function init() {
-      if (getCookie("pin") == "true") {
-        $(".wrapper").toggleClass("toggled");
+      if (getCookie('pin') === 'true') {
+        $('.wrapper').toggleClass('toggled');
         vm.sideNavLock = true;
       }
     }
-    /* Pin sideNav*/
-    vm.changePinStatus = function() {
-      if (getCookie("pin") == "") {
-        setCookie("pin", "true", 365);
+    /* Pin sideNav */
+    vm.changePinStatus = function () {
+      if (getCookie('pin') === '') {
+        setCookie('pin', 'true', 365);
         vm.sideNavLock = true;
       } else {
-        if (getCookie("pin") == "true") {
-          setCookie("pin", "false", 365);
+        if (getCookie('pin') === 'true') {
+          setCookie('pin', 'false', 365);
           vm.sideNavLock = false;
-           toggleNav();
+          toggleNav();
         } else {
-          setCookie("pin", "true", 365);
+          setCookie('pin', 'true', 365);
           vm.sideNavLock = true;
         }
       }
-      console.log("pin", document.cookie);
-    }
-    /* SideNav toggle operation*/
-    $(".dropdown-toggle").click(function(e) {
-        toggleNav();
+    };
+
+    /* SideNav toggle operation */
+    $('.dropdown-toggle').click(function (e) {
+      toggleNav();
     });
-    function toggleNav(){
-       $(".wrapper").toggleClass("toggled");
+
+    function toggleNav() {
+      $('.wrapper').toggleClass('toggled');
     }
-    /*Media queries for pin*/
+    /* Media queries for pin */
     vm.isNormalScreen = $mdMedia('(min-width: 768px)');
-    $scope.$watch(function() {
+    $scope.$watch(function () {
       return $mdMedia('(min-width: 768px)');
-    }, function() {
+    }, function () {
       vm.isNormalScreen = $mdMedia('(min-width: 768px)');
     });
-    /*Cookie operation*/
+    /* Cookie operation */
     function setCookie(cname, cvalue, exdays) {
       var d = new Date();
       d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-      var expires = "expires=" + d.toGMTString();
-      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+      var expires = 'expires=' + d.toGMTString();
+      document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/';
     }
 
     function getCookie(cname) {
-      var name = cname + "=";
+      var name = cname + '=';
       var ca = document.cookie.split(';');
       for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
-        while (c.charAt(0) == ' ') {
+        while (c.charAt(0) === ' ') {
           c = c.substring(1);
         }
-        if (c.indexOf(name) == 0) {
+        if (c.indexOf(name) === 0) {
           return c.substring(name.length, c.length);
         }
       }
-      return "";
+      return '';
     }
 
     function clearCookie(cname) {
-      setCookie("cname", "", -1);
+      setCookie('cname', '', -1);
     }
-    vm.setSideblock = function() {
+    vm.setSideblock = function () {
       vm.sideblock = !vm.sideblock;
     };
   }
