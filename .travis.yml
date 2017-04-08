@@ -37,8 +37,12 @@ before_deploy:
 - eval "$(ssh-agent -s)"
 - chmod 600 $TRAVIS_BUILD_DIR/deploy_key
 - ssh-add $TRAVIS_BUILD_DIR/deploy_key
+#before_script:
+#  - snyk auth $SNYK_TOKEN
+#  - snyk test
 after_script:
 - nsp check
+- snyk test
 - gulp test:coverage
 - node_modules/.bin/lcov-result-merger 'coverage/**/lcov.info' | node_modules/coveralls/bin/coveralls.js
 deploy:
