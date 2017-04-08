@@ -1,6 +1,14 @@
 /*
  * Navbar
  */
+.header .nav-wrapper {
+  padding-left: 0;
+}
+@media only screen and (min-width: 768px) {
+  .header .nav-wrapper {
+    padding-left: 60px;
+  }
+}
 
 .header nav.top {
   border-bottom: 1px solid #ddd;
@@ -11,7 +19,7 @@
   position: fixed;
   right: 0;
   width: 100%;
-  z-index: 48;
+  z-index: 46;
 }
 
 .header nav.top .topTitle a,
@@ -33,6 +41,14 @@
   float: left;
   list-style-type: none;
 }
+.header .center-logo {
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px 0 0 0;
+  position: absolute;
+  right: 0;
+}
 /* List */
 .header nav.top ul li.item {
   width: 50px;
@@ -49,4 +65,27 @@
 .header nav.top ul a:hover {
   background-color: rgb(0,0,0);
   background-color: rgba(0,0,0,.1);
+}
+/*Page path title*/
+.header .page-title {
+  margin: 0 auto;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@media only screen and (min-width: 768px) {
+}
+/*Drop Down*/
+.header .dropdown-button.toolbox-btn {
+  padding-right: 0 !important;
+  text-align: right !important;
+}
+md-menu-content {
+  background: white;
+}
+/*Menu Expand*/
+.header .expand-btn {
+  position: relative;
+  right: -15px;
 }

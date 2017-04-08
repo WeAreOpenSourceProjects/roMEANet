@@ -2,9 +2,18 @@
   <nav class="top" md-colors="{background: 'background-TOPNAV', color: 'primary-50'}">
     <div class="nav-wrapper">
       <ul class="left inline-block topTitle">
-        <span kind="header" page-title></span>
+        <li class="item toggle-left toggle-left-btn">
+          <i class="fa fa-ellipsis-h green-text text-darken-3" md-colors="{color: 'primary-500'}"></i>
+        </li>
       </ul>
-      <ul class="right">
+      <!--<img ui-sref="home" ng-hide="vm.isNormalScreen" src="/modules/core/client/img/brand/logo-black.png" height="40px" class="center-logo"></img>-->
+      <!--Mobile toolbox-->
+      <ul class="right" ng-if="!vm.isNormalScreen">
+        <li class="item">
+          <a class="expand-btn" ng-click="vm.openToolBox()"><i class="fa fa-cog green-text text-darken-3" md-colors="{color: 'primary-500'}" ></i></a>
+        </li>
+      </ul>
+      <ul class="right" ng-show="vm.isNormalScreen||vm.isOpenToolBox">
         <!-- Nav user -->
         <li ng-show="vm.authentication.user" class="item">
           <a tooltipped href="#" ng-click="vm.authentication.signout();" data-position="bottom" data-delay="550" data-tooltip="Sign out"><i class="fa fa-sign-out red-text text-darken-4" md-colors="{color: 'primary-500'}" ></i></a>
@@ -14,20 +23,43 @@
           <a ui-sref="authentication.signin"><i class="fa fa-sign-in green-text text-darken-3" md-colors="{color: 'primary-500'}" ></i></a>
         </li>
       </ul>
-      <ul class="right" ng-if="vm.nav.shouldRender(vm.authentication.user);">
-        <li ng-repeat="item in vm.nav.items | orderBy: 'position'" ng-if="item.shouldRender(vm.authentication.user);" ng-switch="item.type" ng-class="{ active: $state.includes(item.state), drop: item.type === 'dropdown' }" class="item {{item.class}}"
-            drop="item.type">
+      <!--normal screen topbar-->
+      <ul class="right" ng-if="vm.nav.shouldRender(vm.authentication.user)&&(vm.isNormalScreen||vm.isOpenToolBox)">
+        <li ng-repeat="item in vm.nav.items | orderBy: 'position'" ng-if="item.shouldRender(vm.authentication.user)" ng-switch="item.type" ng-class="{ active: $state.includes(item.state), drop: item.type === 'dropdown' }" class="item {{item.class}}" drop="item.type">
           <!-- if Dropdown  -->
-          <a ng-switch-when="dropdown" class='dropdown-button' data-activates="{{item.state}}"  md-colors="{color: 'primary-500'}" dropdown><i class="fa {{item.icon}}"></i></a>
-          <ul ng-switch-when="dropdown" id="{{item.state}}" class='dropdown-content'>
-            <li ng-repeat="subitem in item.items | orderBy: 'position'" ng-if="subitem.shouldRender(authentication.user);" ui-sref-active="active">
-              <a ui-sref="{{subitem.state}}" ng-bind="subitem.title"></a>
-            </li>
-          </ul>
+          <a ng-switch-when="button" class="dropdown-button"><i class="fa {{item.icon}}"></i></a>
+          <md-menu ng-switch-when="dropdown-menu">
+            <a ng-click="vm.openMenu($mdMenu, $event)" class="toggle-button"><i class="fa {{item.icon}}"></i></a>
+            <md-menu-content width="2">
+              <md-menu-item ng-repeat="subitem in item.items | orderBy: 'position'" ng-if="subitem.shouldRender(vm.authentication.user);">
+                <a class="toggle-button" ui-sref="{{subitem.state}}"><i class="fa {{subitem.icon}}"></i></a>
+              </md-menu-item>
+
+            </md-menu-content>
+          </md-menu>
           <!-- else  -->
-          <a tooltipped ng-switch-default ui-sref="{{item.state}}" data-position="bottom" data-delay="550" data-tooltip="{{item.title}}" md-colors="{color: 'primary-500'}" ><i class="fa {{item.icon}}"></i></a>
+          <a tooltipped ng-switch-default ui-sref="{{item.state}}" data-position="bottom" data-delay="550" data-tooltip="{{item.title}}" md-colors="{color: 'primary-500'}"><i class="fa {{item.icon}}"></i></a>
         </li>
       </ul>
+
+      <!--pageTitle-->
+      <div class="page-title" ng-show="vm.isNormalScreen||!vm.isOpenToolBox"> <span kind="header" page-title></span></div>
     </div>
   </nav>
 </div>
+<script>
+  $(".toggle-button").click(function(e) {
+    $(".dropdown-content", e.currentTarget).css("display", "block");
+  })
+  /* Add a grey mask for toggle*/
+  $(".wrapper").prepend("<div class='toggle-mask'></div>");
+  $(".toggle-left").click(function(e) {
+    $(".wrapper").toggleClass("toggled");
+  });
+  $(".toggle-mask").click(function(e) {
+    if ($(".wrapper").hasClass("toggled")) {
+      $(".wrapper").removeClass("toggled");
+      return false;
+    }
+  })
+</script>

@@ -135,6 +135,10 @@
       addNav('topbar', {
         roles: ['*']
       });
+      // Adding the topbar nav for mobile
+      addNav('topbar_mobile', {
+        roles: ['*']
+      });
     }
 
     // Remove existing nav object by nav id
