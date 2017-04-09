@@ -63,7 +63,7 @@ gulp.task('nodemon', function () {
 
   return plugins.nodemon({
     script: 'server.js',
-    nodeArgs: ['debugArgument'],
+    nodeArgs: [debugArgument],
     ext: 'js,html',
     verbose: true,
     watch: _.union(defaultAssets.server.views, defaultAssets.server.allJS, defaultAssets.server.config)
@@ -446,7 +446,7 @@ gulp.task('lint', function (done) {
 // Lint project files and minify them into two production files.
 // runSequence('env:dev', 'wiredep:prod', 'lint', ['uglify', 'cssmin'], done);
 gulp.task('build', function (done) {
-  runSequence('env:dev', 'lint', ['uglify', 'cssmin'], done);
+  runSequence('env:dev', 'wiredep:prod', 'lint', ['uglify', 'cssmin'], done);
 });
 
 // Run the project tests
