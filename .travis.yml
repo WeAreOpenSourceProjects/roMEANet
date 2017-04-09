@@ -8,9 +8,7 @@ matrix:
     - node_js: 7
 os:
   - linux
-  - centos
   - macosx
-  - windows
 env:
   - NODE_ENV=travis CXX="g++-4.8" CC="gcc-4.8"
 services:
@@ -34,6 +32,7 @@ before_install:
   - gem update --system
   - gem install sass --version "=3.3.7"
   - npm i nsp -g
+  - npm i snyk -g
   - export DISPLAY=:99.0
   - bash scripts/setup-protractor.sh
   - sleep 3
