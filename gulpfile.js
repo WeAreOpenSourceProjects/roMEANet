@@ -388,6 +388,10 @@ gulp.task('dropdb', function (done) {
 // Downloads the selenium webdriver if protractor version is compatible
 gulp.task('webdriver_update', webdriver_update);
 
+gulp.task('webdriver_prep', function(done) {
+  runSequence('protractor_prep', 'webdriver_update', done);
+});
+
 gulp.task('protractor_prep', function() {
   var nodeVersions = process.versions;
   switch (nodeVersions.node.substr(0, 1)) {
