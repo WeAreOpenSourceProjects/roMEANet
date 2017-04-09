@@ -5,19 +5,22 @@
     .module('core')
     .controller('HeaderController', HeaderController);
 
-  HeaderController.$inject = ['$scope', '$state', 'Authentication', 'Navs', '$mdDialog', '$mdMedia'];
+  HeaderController.$inject = ['$scope', '$state', 'Authentication', 'Navs', '$mdMedia'];
 
-  function HeaderController($scope, $state, Authentication, Navs, $mdDialog, $mdMedia) {
+  function HeaderController($scope, $state, Authentication, Navs, $mdMedia) {
     var vm = this;
 
     vm.authentication = Authentication;
     vm.isCollapsed = false;
     vm.nav = Navs.getNav('topbar');
 
-    vm.openToolBox = openToolBox; // openToolBox
+    /*
+     * SideNav
+     */
+
+    vm.openToolBox = openToolBox; //openToolBox
     vm.isOpenToolBox = false;
     $scope.$on('$stateChangeSuccess', stateChangeSuccess);
-
     /* Media queries for toolbox */
     vm.isNormalScreen = $mdMedia('(min-width: 768px)');
     $scope.$watch(function () {
@@ -25,7 +28,6 @@
     }, function () {
       vm.isNormalScreen = $mdMedia('(min-width: 768px)');
     });
-
     function stateChangeSuccess() {
       // Collapsing the sideNavmenu after navigation
       vm.isCollapsed = false;
@@ -39,5 +41,6 @@
       /* eslint no-unneeded-ternary:0 */
       vm.isOpenToolBox = vm.isOpenToolBox ? false : true;
     }
+
   }
 }());
