@@ -2,35 +2,6 @@
  * home
  */
 
-/* Big Logo */
-.home .back-logo {
-  color: #2c3e50;
-  margin: auto;
-  overflow: hidden;
-  text-shadow: rgba(0, 0, 0, .2) 1px 1px;
-}
-
-.home .back-logo .while-search {
-  height: 0;
-  margin-top: 0;
-}
-
-.home .back-logo h1 {
-  font-size: 10em;
-  font-weight: bold;
-  margin-top: 2%;
-}
-
-.home .back-logo h2 {
-  font-size: 2.4em;
-  font-weight: bold;
-  margin-top: -30px;
-}
-
-.home .back-logo .initial {
-  color: #000;
-}
-
 /* menu */
 
 .menu {
