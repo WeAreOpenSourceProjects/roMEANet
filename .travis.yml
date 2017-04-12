@@ -1,6 +1,7 @@
 language: node_js
 sudo: false
 node_js:
+  - 6
   - 7
 matrix:
   allow_failures:
@@ -52,9 +53,11 @@ deploy:
     --quiet $TRAVIS_BUILD_DIR/ $USER@$SERVER:$DEPLOY_PATH
   on:
     branch: master
+    node: '7.x'
 - provider: script
   skip_cleanup: true
   script: ssh -p $SSH_PORT $USER@$SERVER -o StrictHostKeyChecking=no "cd $DEPLOY_PATH
     && gulp WeaosProd && pm2 restart all"
   on:
     branch: master
+    node: '7.x'
