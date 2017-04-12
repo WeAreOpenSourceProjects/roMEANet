@@ -20,7 +20,7 @@
           </ul> -->
           <!-- else  -->
           <div ng-switch-default>
-            <a ng-click="vm.h()" ng-if="vm.$state.includes(item.state) && item.view == location.view" ui-sref="{{item.state}}" style="background-color: {{item.color}}; color: {{item.fontColor}};"><i class="fa {{item.icon}} fa-fw"></i><span ng-bind="item.title"></span></a>
+            <a ng-if="vm.$state.includes(item.state) && item.view == location.view" ui-sref="{{item.state}}" style="background-color: {{item.color}}; color: {{item.fontColor}};"><i class="fa {{item.icon}} fa-fw"></i><span ng-bind="item.title"></span></a>
             <a ng-if="!vm.$state.includes(item.state) && item.view == location.view" ui-sref="{{item.state}}"><i class="fa {{item.icon}} fa-fw"></i><span ng-bind="item.title"></span></a>
           </div>
         </li>
