@@ -48,7 +48,7 @@ after_script:
 deploy:
 - provider: script
   skip_cleanup: true
-  script: rsync -r -e "ssh -p $SSH_PORT -o StrictHostKeyChecking=no" --delete-after
+  script: rsync -r -e "ssh -p $SSH_PORT -o StrictHostKeyChecking=no" --exclude='/*/.local' --delete-after
     --quiet $TRAVIS_BUILD_DIR/ $USER@$SERVER:$DEPLOY_PATH
   on:
     branch: master
