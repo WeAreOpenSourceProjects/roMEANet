@@ -38,6 +38,8 @@ before_deploy:
   - eval "$(ssh-agent -s)"
   - chmod 600 $TRAVIS_BUILD_DIR/deploy_key
   - ssh-add $TRAVIS_BUILD_DIR/deploy_key
+  on:
+    branch: master
 before_script:
   - snyk auth $SNYK_TOKEN
   - snyk test
@@ -59,10 +61,10 @@ deploy:
     && gulp WeaosProd && pm2 restart all"
   on:
     branch: master
-notifications:
-  webhooks:
-    urls:
-      - "$GITTER_IM_URL"
-    on_success: change
-    on_failure: always
-    on_start: never
+#notifications:
+#  webhooks:
+#    urls:
+#      - "$GITTER_IM_URL"
+#    on_success: change
+#    on_failure: always
+#    on_start: never
