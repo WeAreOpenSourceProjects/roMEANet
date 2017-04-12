@@ -32,3 +32,15 @@
 .users .SelectHeader md-content._md {
 	max-height: 240px;
 }
+
+.users .chips md-chips-wrap {
+	box-shadow: none;
+}
+
+.users .md-list-item-text {
+	margin-right: 5px !important;
+}
+
+.users md-list-item.md-2-line .md-list-item-text p {
+	word-wrap: break-word;
+}

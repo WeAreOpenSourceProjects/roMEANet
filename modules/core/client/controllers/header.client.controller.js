@@ -18,7 +18,7 @@
      * SideNav
      */
 
-    vm.openToolBox = openToolBox; //openToolBox
+    vm.openToolBox = openToolBox; // openToolBox
     vm.isOpenToolBox = false;
     $scope.$on('$stateChangeSuccess', stateChangeSuccess);
     /* Media queries for toolbox */
