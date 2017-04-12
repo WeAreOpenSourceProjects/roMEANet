@@ -72,5 +72,8 @@ module.exports = {
     options: {
       expiresIn: process.env.JWT_EXPIRES_IN || '1d'
     }
+  },
+  users: {
+    groups: ['user', 'admin']
   }
 };
