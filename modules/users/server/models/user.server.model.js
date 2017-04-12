@@ -14,7 +14,7 @@ var mongoose = require('mongoose'),
 
 owasp.config(config.shared.owasp);
 
-
+var usersGroups = config.users.groups;
 /**
  * A Validation function for local strategy properties
  */
@@ -106,7 +106,7 @@ var UserSchema = new Schema({
   roles: {
     type: [{
       type: String,
-      enum: ['user', 'admin']
+      enum: usersGroups
     }],
     default: ['user'],
     required: 'Please provide at least one role'
