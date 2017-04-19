@@ -7,7 +7,7 @@ module.exports = {
         // bower:css
         'public/lib/angular-tooltips/dist/angular-tooltips.min.css',
         'public/lib/angular-material/angular-material.min.css',
-        'public/lib/angular-loading-bar/build/loading-bar.min.css',
+        'public/lib/angular-loading-bar/build/loading-bar.min.css'
         // endbower
       ],
       js: [
@@ -26,7 +26,7 @@ module.exports = {
         'public/lib/lodash/lodash.js',
         'public/lib/angular-loading-bar/build/loading-bar.min.js',
         'public/lib/angularUtils-pagination/dirPagination.js',
-        'public/lib/angular-sanitize/angular-sanitize.min.js',
+        'public/lib/angular-sanitize/angular-sanitize.min.js'
         // endbower
       ]
     },
