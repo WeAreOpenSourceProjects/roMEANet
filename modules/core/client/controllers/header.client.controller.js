@@ -41,6 +41,10 @@
       /* eslint no-unneeded-ternary:0 */
       vm.isOpenToolBox = vm.isOpenToolBox ? false : true;
     }
+    /* Open subNavBar menu */
+    vm.openMenu = function($mdMenu, ev) {
+      $mdMenu.open(ev);
+    };
 
   }
 }());

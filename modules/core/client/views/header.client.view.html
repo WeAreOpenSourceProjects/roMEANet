@@ -32,9 +32,11 @@
             <a ng-click="vm.openMenu($mdMenu, $event)" class="toggle-button"><i class="fa {{item.icon}}"></i></a>
             <md-menu-content width="2">
               <md-menu-item ng-repeat="subitem in item.items | orderBy: 'position'" ng-if="subitem.shouldRender(vm.authentication.user);">
-                <a class="toggle-button" ui-sref="{{subitem.state}}"><i class="fa {{subitem.icon}}"></i></a>
+                <md-button ui-sref="{{subitem.state}}">
+                  <i class="fa {{subitem.icon}}" md-menu-align-target></i>
+                  &nbsp;{{subitem.title}}
+                </md-button>
               </md-menu-item>
-
             </md-menu-content>
           </md-menu>
           <!-- else  -->
