@@ -6,6 +6,27 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
+
+/**
+  * @swagger
+  * definitions:
+  *   Article:
+  *     required:
+  *       - title
+  *     properties:
+  *       title:
+  *         type: string
+  *       content:
+  *         type: string
+  *       path:
+  *         type: string
+  *       user:
+  *         type: string
+  *       created:
+  *         type: string
+  *         format: date
+  */
+
 /**
  * Article Schema
  */
