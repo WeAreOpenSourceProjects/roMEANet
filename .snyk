@@ -1,0 +1,25 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.7.1
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  'npm:qs:20170213':
+    - gulp-livereload > mini-lr > qs:
+        reason: None given
+        expires: '2017-05-25T21:31:05.970Z'
+    - gulp-livereload > mini-lr > body-parser > qs:
+        reason: None given
+        expires: '2017-05-25T21:31:05.970Z'
+    - express-swaggerize > swagger-tools > qs:
+        reason: None given
+        expires: '2017-05-25T21:31:05.970Z'
+    - express-swaggerize > swagger-tools > body-parser > qs:
+        reason: None given
+        expires: '2017-05-25T21:31:05.970Z'
+    - express-swaggerize > swagger-tools > superagent > qs:
+        reason: None given
+        expires: '2017-05-25T21:31:05.970Z'
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:qs:20170213':
+    - express-swaggerize > swagger-jsdoc > chokidar > fsevents > node-pre-gyp > request > qs:
+        patched: '2017-04-25T21:30:09.113Z'
