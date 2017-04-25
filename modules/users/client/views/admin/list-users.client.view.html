@@ -27,16 +27,16 @@
           </div>
           <div ng-if="vm.users.length > 0">
             <md-list-item class="md-2-line" dir-paginate="user in vm.users | filter: vm.search | itemsPerPage: vm.itemsPerPage" pagination-id="users" ui-sref="admin.user({userId: user._id})">
-              <img ng-src="{{user.profileImageURL}}" class="md-avatar" alt="{{user.displayName}}" />
-              <div class="md-list-item-text">
+              <img ng-src="/{{user.profileImageURL}}" class="md-avatar" alt="{{user.displayName}}" />
+              <div flex="25" class="md-list-item-text">
                 <b ng-bind="user.username"></b> - <span ng-bind='user.displayName'></span>
-                <p>
+                <p style="word-wrap: break-word;">
                   <span ng-bind="user.email"></span> -
                   <span>{{user.created | date:"MM/dd/yyyy"}}</span>
                 </p>
               </div>
-              <div class="md-secondary">
-                <span ng-repeat="item in user.roles">{{item}}  </span><br />
+              <div flex="70" layout="row" layout-align-gt-md="end center" layout-align="start center">
+                <md-chips class="chips" ng-model="user.roles" readonly="true"></md-chips>
               </div>
             </md-list-item>
             <md-divider></md-divider>

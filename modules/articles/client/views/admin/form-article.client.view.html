@@ -8,7 +8,7 @@
     <form flex="100" class="base" name="vm.form.articleForm" ng-submit="vm.save(vm.form.articleForm.$valid)" novalidate>
       <md-input-container class="md-icon-float md-block" show-errors>
         <md-icon><i class="fa fa-text-width"></i></md-icon>
-        <input ng-model="vm.article.title" type="text" placeholder="Title" id="title" name="title" required />
+        <input ng-model="vm.article.title" type="text" placeholder="Title" id="title" name="title" required autofocus />
         <div ng-messages="vm.form.articleForm.title.$error" role="alert">
           <p ng-message="required" class="error-text">Article title is required.</p>
         </div>

@@ -11,6 +11,7 @@
       'ngAnimate',
       'ngMessages',
       'ngMaterial',
+      'ngSanitize',
       'ui.router',
       'ngFileUpload',
       '720kb.tooltips',

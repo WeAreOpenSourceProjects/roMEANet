@@ -47,9 +47,23 @@ gulp.task('env:prod', function () {
 
 // Nodemon task
 gulp.task('nodemon', function () {
+
+  var nodeVersions = process.versions;
+  var debugArgument = '--debug';
+  switch (nodeVersions.node.substr(0, 1)) {
+    case '4':
+    case '5':
+    case '6':
+      debugArgument = '--debug';
+      break;
+    case '7':
+      debugArgument = '--inspect';
+      break;
+  }
+
   return plugins.nodemon({
     script: 'server.js',
-    nodeArgs: ['--debug'],
+    nodeArgs: [debugArgument],
     ext: 'js,html',
     verbose: true,
     watch: _.union(defaultAssets.server.views, defaultAssets.server.allJS, defaultAssets.server.config)
@@ -68,29 +82,29 @@ gulp.task('nodemon-nodebug', function () {
 // Watch Files For Changes
 gulp.task('watch', function () {
   // Start livereload
-  plugins.livereload.listen();
+  plugins.refresh.listen();
 
   // Add watch rules
-  gulp.watch(defaultAssets.server.views).on('change', plugins.livereload.changed);
-  gulp.watch(defaultAssets.server.allJS, ['eslint']).on('change', plugins.livereload.changed);
-  gulp.watch(defaultAssets.client.js, ['eslint']).on('change', plugins.livereload.changed);
-  gulp.watch(defaultAssets.client.css, ['csslint']).on('change', plugins.livereload.changed);
-  gulp.watch(defaultAssets.client.sass, ['sass', 'csslint']).on('change', plugins.livereload.changed);
-  gulp.watch(defaultAssets.client.less, ['less', 'csslint']).on('change', plugins.livereload.changed);
+  gulp.watch(defaultAssets.server.views).on('change', plugins.refresh.changed);
+  gulp.watch(defaultAssets.server.allJS, ['eslint']).on('change', plugins.refresh.changed);
+  gulp.watch(defaultAssets.client.js, ['eslint']).on('change', plugins.refresh.changed);
+  gulp.watch(defaultAssets.client.css, ['csslint']).on('change', plugins.refresh.changed);
+  gulp.watch(defaultAssets.client.sass, ['sass', 'csslint']).on('change', plugins.refresh.changed);
+  gulp.watch(defaultAssets.client.less, ['less', 'csslint']).on('change', plugins.refresh.changed);
 
   if (process.env.NODE_ENV === 'production') {
     gulp.watch(defaultAssets.server.gulpConfig, ['templatecache', 'eslint']);
-    gulp.watch(defaultAssets.client.views, ['templatecache']).on('change', plugins.livereload.changed);
+    gulp.watch(defaultAssets.client.views, ['templatecache']).on('change', plugins.refresh.changed);
   } else {
     gulp.watch(defaultAssets.server.gulpConfig, ['eslint']);
-    gulp.watch(defaultAssets.client.views).on('change', plugins.livereload.changed);
+    gulp.watch(defaultAssets.client.views).on('change', plugins.refresh.changed);
   }
 });
 
 // Watch server test files
 gulp.task('watch:server:run-tests', function () {
   // Start livereload
-  plugins.livereload.listen();
+  plugins.refresh.listen();
 
   // Add Server Test file rules
   gulp.watch([testAssets.tests.server, defaultAssets.server.allJS], ['test:server']).on('change', function (file) {
@@ -108,7 +122,7 @@ gulp.task('watch:server:run-tests', function () {
       });
     });
 
-    plugins.livereload.changed();
+    plugins.refresh.changed();
   });
 });
 
@@ -169,9 +183,6 @@ gulp.task('sass', function () {
   return gulp.src(defaultAssets.client.sass)
     .pipe(plugins.sass())
     .pipe(plugins.autoprefixer())
-    .pipe(plugins.rename(function (file) {
-      file.dirname = file.dirname.replace(path.sep + 'scss', path.sep + 'css');
-    }))
     .pipe(gulp.dest('./modules/'));
 });
 
@@ -180,9 +191,6 @@ gulp.task('less', function () {
   return gulp.src(defaultAssets.client.less)
     .pipe(plugins.less())
     .pipe(plugins.autoprefixer())
-    .pipe(plugins.rename(function (file) {
-      file.dirname = file.dirname.replace(path.sep + 'less', path.sep + 'css');
-    }))
     .pipe(gulp.dest('./modules/'));
 });
 
@@ -377,8 +385,35 @@ gulp.task('dropdb', function (done) {
   });
 });
 
-// Downloads the selenium webdriver
+// Downloads the selenium webdriver if protractor version is compatible
 gulp.task('webdriver_update', webdriver_update);
+
+gulp.task('webdriver_prep', function(done) {
+  runSequence('protractor_prep', 'webdriver_update', done);
+});
+
+gulp.task('protractor_prep', function() {
+  var nodeVersions = process.versions;
+  switch (nodeVersions.node.substr(0, 1)) {
+    case '4':
+    case '5':
+      console.log('E2E testing doesnt support v4 and v5');
+      process.exit(0);
+      break;
+    case '6':
+      if (parseInt(nodeVersions.node.substr(1, 1), 10) < 9) {
+        console.log('E2E testing with latest protractor requires v >= 6.9 ');
+        process.exit(0);
+      }
+      break;
+    default:
+      console.log('Detecting support for protractor E2E tests');
+      break;
+  }
+
+  return gulp.src('*.js');
+});
+
 
 // Start the standalone selenium server
 // NOTE: This is not needed if you reference the
@@ -386,7 +421,7 @@ gulp.task('webdriver_update', webdriver_update);
 gulp.task('webdriver_standalone', webdriver_standalone);
 
 // Protractor test runner task
-gulp.task('protractor', ['webdriver_update'], function () {
+gulp.task('protractor', ['webdriver_prep'], function () {
   gulp.src([])
     .pipe(protractor({
       configFile: 'protractor.conf.js'
@@ -411,7 +446,7 @@ gulp.task('lint', function (done) {
 // Lint project files and minify them into two production files.
 // runSequence('env:dev', 'wiredep:prod', 'lint', ['uglify', 'cssmin'], done);
 gulp.task('build', function (done) {
-  runSequence('env:dev', 'lint', ['uglify', 'cssmin'], done);
+  runSequence('env:dev', 'wiredep:prod', 'lint', ['uglify', 'cssmin'], done);
 });
 
 // Run the project tests
@@ -440,14 +475,9 @@ gulp.task('test:coverage', function (done) {
   runSequence('env:test', ['copyLocalEnvConfig', 'makeUploadsDir', 'dropdb'], 'lint', 'mocha:coverage', 'karma:coverage', done);
 });
 
-// Run the project in development mode
+// Run the project in development mode with node debugger enabled
 gulp.task('default', function (done) {
   runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'lint', ['nodemon', 'watch'], done);
-});
-
-// Run the project in debug mode
-gulp.task('debug', function (done) {
-  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'lint', ['nodemon-nodebug', 'watch'], done);
 });
 
 // Run the project in production mode

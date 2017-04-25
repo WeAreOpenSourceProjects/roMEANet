@@ -8,7 +8,7 @@
     <form flex="100" class="base" name="vm.userForm" ng-submit="vm.update(vm.userForm.$valid)" novalidate autocomplete="off">
       <md-input-container class="md-icon-float md-block" show-errors>
         <md-icon><i class="fa fa-user"></i></md-icon>
-        <input ng-model="vm.user.firstName" type="text" placeholder="First Name" id="firstName" name="firstName" required />
+        <input ng-model="vm.user.firstName" type="text" placeholder="First Name" id="firstName" name="firstName" required autofocus />
         <div ng-messages="vm.userForm.firstName.$error" role="alert">
           <p ng-message="required" class="error-text">First name is required.</p>
         </div>

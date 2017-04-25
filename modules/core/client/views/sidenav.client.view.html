@@ -1,9 +1,11 @@
-<div class="sidenav" ng-controller="SidenavController as vm">
+<div class="sidenav" ng-controller="SidenavController as vm" md-colors="{background: 'background-SIDENAVLIGHT'}">
   <div class="sidebar-nav">
-    <div class="head">
+    <div class="head" md-colors="{background: 'background-SIDENAVDARK'}">
       <a ui-sref="home">
-        <img src="/modules/core/client/img/brand/logo-white.png" width="50px" class="logo"></img>
+        <img src="/modules/core/client/img/brand/logo-romeanet-light-small.png" width="36px" class="logo"></img>
         <span style="font-size:28px; color:#fff;">roMEANet</span>
+        <a class="right pin-icon" ng-click="vm.changePinStatus()" ng-show="vm.isNormalScreen&&vm.sideNavLock"><i class=" fa fa-lock fa-fw"></i></a>
+        <a class="right pin-icon" ng-click="vm.changePinStatus()" ng-show="vm.isNormalScreen&&!vm.sideNavLock"><i class=" fa fa-unlock fa-fw"></i></a>
       </a>
     </div>
     <div class="sidebar">
@@ -32,7 +34,7 @@
         </a>
       </div>
     </div>
-    <div class="foot">
+    <div class="foot" md-colors="{background: 'background-SIDENAVDARK'}">
       <a class="dropdown-toggle center-align" ng-click="vm.setSideblock()">
         <i ng-if="vm.sideblock" class="fa fa-angle-left fa-fw"></i>
         <i ng-if="!vm.sideblock" class="fa fa-angle-right fa-fw"></i>
@@ -40,9 +42,3 @@
     </div>
   </div>
 </div>
-
-<script>
-$(".dropdown-toggle").click(function (e) {
-  $(".wrapper").toggleClass("toggled");
-});
-</script>
