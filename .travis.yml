@@ -8,7 +8,6 @@ matrix:
     - node_js: 7
 os:
   - linux
-  - macosx
 env:
   - NODE_ENV=travis CXX="g++-4.8" CC="gcc-4.8"
 services:
