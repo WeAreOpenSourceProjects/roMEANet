@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -16,10 +16,9 @@
     };
 
     Authentication.readyPromise.promise
-      .then(function(auth) {
+      .then(function (auth) {
         $rootScope.$on('$stateChangeStart', stateChangeStart);
       });
-
     $rootScope.$on('$stateChangeSuccess', stateChangeSuccess);
 
     function stateChangeStart(event, toState, toParams, fromState, fromParams) {
@@ -39,7 +38,7 @@
           if (Authentication.user !== null && typeof Authentication.user === 'object') {
             $state.transitionTo('forbidden');
           } else {
-            $state.go('authentication.signin').then(function() {
+            $state.go('authentication.signin').then(function () {
               // Record previous state
               storePreviousState(toState, toParams);
             });

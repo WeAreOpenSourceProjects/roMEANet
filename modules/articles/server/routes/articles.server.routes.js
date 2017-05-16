@@ -10,11 +10,6 @@ module.exports = function (app) {
 
   /**
    * @swagger
-   * tags:
-   *   name: Articles
-   *   description: Articles management
-   *
-   * @swagger
    * parameters:
    *   title:
    *     name: title
@@ -44,6 +39,19 @@ module.exports = function (app) {
    *     type: string
    *     format: date
    *
+   */
+
+
+  // Articles collection routes
+  app.route('/api/articles').all(articlesPolicy.isAllowed)
+    .get(articles.list)
+    .post(articles.create);
+
+  /**
+   * @swagger
+   * tags:
+   *   name: Articles
+   *   description: Articles management
    *
    * @swagger
    * /articles:
@@ -77,18 +85,13 @@ module.exports = function (app) {
    *           type: object
    *           $ref: '#/definitions/Article'
    *
-   *
-   *
-   *
-   *
    */
 
-  // Articles collection routes
-  app.route('/api/articles').all(articlesPolicy.isAllowed)
-    .get(articles.list)
-    .post(articles.create);
-
-
+  // Single article routes
+  app.route('/api/articles/:articleId').all(articlesPolicy.isAllowed)
+    .get(articles.read)
+    .put(articles.update)
+    .delete(articles.delete);
 
   /**
    * @swagger
@@ -154,16 +157,6 @@ module.exports = function (app) {
    *         description: articles
    *
    */
-
-  // Single article routes
-  app.route('/api/articles/:articleId').all(articlesPolicy.isAllowed)
-    .get(articles.read)
-    .put(articles.update)
-    .delete(articles.delete);
-
-
-
-
 
   // Finish by binding the article middleware
   app.param('articleId', articles.articleByID);
