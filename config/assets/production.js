@@ -5,8 +5,9 @@ module.exports = {
     lib: {
       css: [
         // bower:css
-        'public/lib/angular-tooltips/dist/angular-tooltips.min.css',
         'public/lib/angular-material/angular-material.min.css',
+        'public/lib/font-awesome/css/font-awesome.min.css',
+        'public/lib/angular-tooltips/dist/angular-tooltips.min.css',
         'public/lib/angular-loading-bar/build/loading-bar.min.css'
         // endbower
       ],
