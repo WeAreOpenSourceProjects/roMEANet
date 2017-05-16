@@ -6,7 +6,6 @@
     .module(app.applicationModuleName, app.applicationModuleVendorDependencies)
     .constant('_', window._);
 
-
   // Setting HTML5 Location Mode
   angular
     .module(app.applicationModuleName)
