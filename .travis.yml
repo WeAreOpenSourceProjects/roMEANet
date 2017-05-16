@@ -8,7 +8,6 @@ matrix:
     - node_js: 7
 os:
   - linux
-  - macosx
 env:
   - NODE_ENV=travis CXX="g++-4.8" CC="gcc-4.8"
 services:
@@ -39,8 +38,8 @@ before_deploy:
   - chmod 600 $TRAVIS_BUILD_DIR/deploy_key
   - ssh-add $TRAVIS_BUILD_DIR/deploy_key
 before_script:
-  - snyk auth $SNYK_TOKEN
-  - snyk test
+#  - snyk auth $SNYK_TOKEN
+#  - snyk test
 after_script:
   - nsp check
   - snyk test
