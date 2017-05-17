@@ -23,7 +23,7 @@
     "start:debug": "node-debug --web-host 0.0.0.0 server.js & gulp debug",
     "gulp": "gulp",
     "lint": "gulp lint",
-    "test": "snyk test && gulp test",
+    "test": "gulp test",
     "test:server": "gulp test:server",
     "test:server:watch": "gulp test:server:watch",
     "test:client": "gulp test:client",
