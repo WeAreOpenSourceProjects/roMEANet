@@ -8,10 +8,12 @@ matrix:
     - node_js: 7
 os:
   - linux
+# NodeJS v4 requires gcc 4.8
 env:
   - NODE_ENV=travis CXX="g++-4.8" CC="gcc-4.8"
 services:
   - mongodb
+# gcc 4.8 requires ubuntu-toolchain-r-test
 addons:
   ssh_known_hosts: "$SERVER"
   apt:
@@ -28,8 +30,8 @@ cache:
 before_install:
   - openssl aes-256-cbc -K $encrypted_6729f53900bc_key -iv $encrypted_6729f53900bc_iv
     -in deploy_key.enc -out deploy_key -d
-  # - npm i nsp -g
-  # - npm i snyk -g
+  - npm i nsp -g
+  - npm i snyk -g
   - export DISPLAY=:99.0
   - bash scripts/setup-protractor.sh
   - sleep 3
@@ -37,12 +39,12 @@ before_deploy:
   - eval "$(ssh-agent -s)"
   - chmod 600 $TRAVIS_BUILD_DIR/deploy_key
   - ssh-add $TRAVIS_BUILD_DIR/deploy_key
-before_script:
+# before_script:
 #  - snyk auth $SNYK_TOKEN
 #  - snyk test
 after_script:
-  # - nsp check
-  # - snyk test
+  - nsp check
+  - snyk test
   - gulp test:coverage
   - node_modules/.bin/lcov-result-merger 'coverage/**/lcov.info' | node_modules/coveralls/bin/coveralls.js
 deploy:
