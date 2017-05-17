@@ -8,10 +8,12 @@ matrix:
     - node_js: 7
 os:
   - linux
+# NodeJS v4 requires gcc 4.8
 env:
   - NODE_ENV=travis CXX="g++-4.8" CC="gcc-4.8"
 services:
   - mongodb
+# gcc 4.8 requires ubuntu-toolchain-r-test
 addons:
   ssh_known_hosts: "$SERVER"
   apt:
@@ -37,7 +39,7 @@ before_deploy:
   - eval "$(ssh-agent -s)"
   - chmod 600 $TRAVIS_BUILD_DIR/deploy_key
   - ssh-add $TRAVIS_BUILD_DIR/deploy_key
-before_script:
+# before_script:
 #  - snyk auth $SNYK_TOKEN
 #  - snyk test
 after_script:
