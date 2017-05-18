@@ -4,7 +4,9 @@
 var config = {
   specs: ['modules/*/tests/e2e/*.js'],
   onPrepare: function() {
-    browser.driver.manage().window().setSize(1920, 1080);
+    setTimeout(function() {
+      browser.driver.manage().window().setSize(1920, 1080);
+    });
     var disableCssAnimate = function() {
         angular
             .module('disableCssAnimate', [])
