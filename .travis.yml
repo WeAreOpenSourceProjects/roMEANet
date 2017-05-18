@@ -1,5 +1,6 @@
 language: node_js
 sudo: false
+dist: trusty
 node_js:
   - 6
   - 7
@@ -19,10 +20,12 @@ addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
+      - google-chrome
     packages:
       - g++-4.8
       - gcc-4.8
       - clang
+      - google-chrome-stable
 cache:
   directories:
     - node_modules
