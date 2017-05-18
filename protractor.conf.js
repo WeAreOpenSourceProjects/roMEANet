@@ -11,6 +11,7 @@ var config = {
           height: window.screen.availHeight
         };
       }).then(function(result) {
+        browser.driver.manage().window().setSize(result.width, result.height);
       });
     });
     var disableCssAnimate = function() {
