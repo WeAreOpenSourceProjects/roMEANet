@@ -55,12 +55,12 @@ module.exports = function (karmaConfig) {
     // - PhantomJS
     // - IE (only Windows)
     browsers: ['Chrome'],
-     customLaunchers: {
-       Chrome_travis_ci: {
-         base: 'Chrome',
-         flags: ['--no-sandbox']
-       }
-     },
+    customLaunchers: {
+      Chrome_travis_ci: {
+        base: 'Chrome',
+        flags: ['--no-sandbox']
+      }
+    },
     // If browser does not capture in given timeout [ms], kill it
     captureTimeout: 60000,
 
