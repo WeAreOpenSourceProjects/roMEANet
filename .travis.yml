@@ -1,5 +1,6 @@
 language: node_js
 sudo: false
+dist: trusty
 node_js:
   - 6
   - 7
@@ -19,10 +20,12 @@ addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
+      - google-chrome
     packages:
       - g++-4.8
       - gcc-4.8
       - clang
+      - google-chrome-stable
 cache:
   directories:
     - node_modules
@@ -32,8 +35,9 @@ before_install:
     -in deploy_key.enc -out deploy_key -d
   - npm i nsp -g
   - npm i snyk -g
-  - export DISPLAY=:99.0
-  - bash scripts/setup-protractor.sh
+  - "export PATH=$PATH:/usr/lib/chromium-browser/"
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
   - sleep 3
 before_deploy:
   - eval "$(ssh-agent -s)"

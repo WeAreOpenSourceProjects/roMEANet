@@ -1,44 +1,52 @@
-<div class="sidenav" ng-controller="SidenavController as vm" md-colors="{background: 'background-SIDENAVLIGHT'}">
-  <div class="sidebar-nav">
-    <div class="head" md-colors="{background: 'background-SIDENAVDARK'}">
-      <a ui-sref="home">
+<div ng-controller="SidenavController as vm">
+
+  <input type="checkbox" class="menu-toggle" id="menu-toggle" ng-model="vm.menuToogle">
+    <label for="menu-toggle" class="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></label>
+  </input>
+
+  <div class="sidenav" md-colors="{background: 'background-SIDENAVLIGHT'}">
+    <div class="sidebar-nav">
+      <div class="head" md-colors="{background: 'background-SIDENAVDARK'}">
+        <a ui-sref="home" ng-click="vm.menuClick()">
         <img src="/modules/core/client/img/brand/logo-romeanet-light-small.png" width="36px" class="logo"></img>
         <span style="font-size:28px; color:#fff;">roMEANet</span>
-        <a class="right pin-icon" ng-click="vm.changePinStatus()" ng-show="vm.isNormalScreen&&vm.sideNavLock"><i class=" fa fa-lock fa-fw"></i></a>
-        <a class="right pin-icon" ng-click="vm.changePinStatus()" ng-show="vm.isNormalScreen&&!vm.sideNavLock"><i class=" fa fa-unlock fa-fw"></i></a>
-      </a>
-    </div>
-    <div class="sidebar">
-      <ul ng-if="vm.sideNav.shouldRender(vm.authentication.user);">
-        <li ng-repeat="item in vm.sideNav.items | orderBy: 'position'" ng-if="item.shouldRenderItem(vm.authentication.user);" ng-switch="item.view" ng-class="{ drop: item.type === 'dropdown' }" drop="item.type">
-          <!-- if Dropdown  -->
-          <!--<a ng-switch-when="dropdown" class='dropdown-button' data-activates="{{item.title}}" dropdown>{{::item.title}}&nbsp;<i class="material-icons right">arrow_drop_down</i></a>-->
-          <!-- <ul ng-switch-when="dropdown" id="{{item.title}}" class='dropdown-content'>
-            <li ng-repeat="subitem in item.items | orderBy: 'position'" ng-if="subitem.shouldRender(authentication.user);" ui-sref-active="active">
-              <a ui-sref="{{subitem.state}}" ng-bind="subitem.title"></a>
-            </li>
-          </ul> -->
-          <!-- else  -->
-          <div ng-switch-default>
-            <a ng-if="vm.$state.includes(item.state) && item.view == location.view" ui-sref="{{item.state}}" style="background-color: {{item.color}}; color: {{item.fontColor}};"><i class="fa {{item.icon}} fa-fw"></i><span ng-bind="item.title"></span></a>
-            <a ng-if="!vm.$state.includes(item.state) && item.view == location.view" ui-sref="{{item.state}}"><i class="fa {{item.icon}} fa-fw"></i><span ng-bind="item.title"></span></a>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div class="user">
-      <div ng-show="vm.authentication.user">
-        <a ui-sref="settings.profile">
+        </a>
+      </div>
+      <div class="sidebar">
+        <ul ng-if="vm.sideNav.shouldRender(vm.authentication.user);">
+          <li ng-repeat="item in vm.sideNav.items | orderBy: 'position'" ng-if="item.shouldRenderItem(vm.authentication.user);" ng-switch="item.view" ng-class="{ drop: item.type === 'dropdown' }" drop="item.type">
+            <!-- if Dropdown  -->
+            <!--
+            <a ng-switch-when="dropdown" class='dropdown-button' data-activates="{{item.title}}" dropdown>{{::item.title}}&nbsp;<i class="material-icons right">arrow_drop_down</i></a>
+            <ul ng-switch-when="dropdown" id="{{item.title}}" class='dropdown-content'>
+              <li ng-repeat="subitem in item.items | orderBy: 'position'" ng-if="subitem.shouldRender(authentication.user);" ui-sref-active="active">
+                <a ui-sref="{{subitem.state}}" ng-bind="subitem.title"></a>
+              </li>
+            </ul>
+            -->
+            <!-- else  -->
+            <div ng-switch-default>
+              <a ng-if="vm.$state.includes(item.state) && item.view == location.view" ui-sref="{{item.state}}" ng-click="vm.menuClick()" style="background-color: {{item.color}}; color: {{item.fontColor}};"><i class="fa {{item.icon}} fa-fw"></i><span ng-bind="item.title"></span></a>
+              <a ng-if="!vm.$state.includes(item.state) && item.view == location.view" ui-sref="{{item.state}}" ng-click="vm.menuClick()"><i class="fa {{item.icon}} fa-fw"></i><span ng-bind="item.title"></span></a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="user">
+        <div ng-show="vm.authentication.user">
+          <a ui-sref="settings.profile" ng-click="vm.menuClick()">
           <img ng-src="/{{vm.authentication.user.profileImageURL}}" alt="{{vm.authentication.user.displayName}}" class="image" />
           <span>{{vm.authentication.user.displayName}}</span>
         </a>
+        </div>
       </div>
-    </div>
-    <div class="foot" md-colors="{background: 'background-SIDENAVDARK'}">
-      <a class="dropdown-toggle center-align" ng-click="vm.setSideblock()">
+      <div class="foot" md-colors="{background: 'background-SIDENAVDARK'}">
+        <a class="dropdown-toggle center-align" ng-click="vm.setSideblock()">
         <i ng-if="vm.sideblock" class="fa fa-angle-left fa-fw"></i>
         <i ng-if="!vm.sideblock" class="fa fa-angle-right fa-fw"></i>
       </a>
+      </div>
     </div>
   </div>
+
 </div>
