@@ -3,10 +3,10 @@
     <div layout="row" class="row" layout-align="center">
       <div flex="100" class="center-align">
         <md-nav-bar md-selected-nav-item="vm.currentNavItem" nav-bar-aria-label="navigation links">
-          <md-nav-item md-nav-sref="settings.profile" name="profile" value="profile">Edit Profile</md-nav-item>
-          <md-nav-item md-nav-sref="settings.picture" name="picture" value="picture">Change Profile Picture</md-nav-item>
-          <md-nav-item  ng-show="vm.user.provider === 'local'" md-nav-sref="settings.password" name="password" value="password">Change Password</md-nav-item>
-          <md-nav-item md-nav-sref="settings.accounts" name="accounts" value="accounts">Manage Social Accounts</md-nav-item>
+          <md-nav-item md-nav-sref="settings.profile" name="profile" value="profile"><i class="fa fa-pencil"></i> <span class="hide-xs"> Edit Profile </span></md-nav-item>
+          <md-nav-item md-nav-sref="settings.picture" name="picture" value="picture"><i class="fa fa-picture-o"></i>  <span class="hide-xs"> Change Profile Picture  </span></md-nav-item>
+          <md-nav-item  ng-show="vm.user.provider === 'local'" md-nav-sref="settings.password" name="password" value="password"><i class="fa fa-key"></i> <span class="hide-xs"> Change Password  </span></md-nav-item>
+          <md-nav-item md-nav-sref="settings.accounts" name="accounts" value="accounts"><i class="fa fa-facebook"></i>  <span class="hide-xs"> Manage Social Accounts  </span></md-nav-item>
         </md-nav-bar>
       </div>
     </div>
