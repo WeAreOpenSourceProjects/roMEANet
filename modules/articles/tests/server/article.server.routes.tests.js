@@ -117,7 +117,10 @@ describe('Article CRUD tests', function () {
     var articleObj = new Article(article);
 
     // Save the article
-    articleObj.save(function () {
+    articleObj.save(function (err) {
+      if (err) {
+        return done(err);
+      }
       // Request articles
       request(app).get('/api/articles')
         .end(function (req, res) {
@@ -136,7 +139,10 @@ describe('Article CRUD tests', function () {
     var articleObj = new Article(article);
 
     // Save the article
-    articleObj.save(function () {
+    articleObj.save(function (err) {
+      if (err) {
+        return done(err);
+      }
       request(app).get('/api/articles/' + articleObj._id)
         .end(function (req, res) {
           // Set assertion
@@ -201,7 +207,10 @@ describe('Article CRUD tests', function () {
     var articleObj = new Article(article);
 
     // Save the article
-    articleObj.save(function () {
+    articleObj.save(function (err) {
+      if (err) {
+        return done(err);
+      }
       // Try deleting article
       request(app).delete('/api/articles/' + articleObj._id)
         .expect(403)
@@ -311,7 +320,10 @@ describe('Article CRUD tests', function () {
     var articleObj = new Article(article);
 
     // Save the article
-    articleObj.save(function () {
+    articleObj.save(function (err) {
+      if (err) {
+        return done(err);
+      }
       request(app).get('/api/articles/' + articleObj._id)
         .end(function (req, res) {
           // Set assertion
