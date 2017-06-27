@@ -234,8 +234,6 @@ module.exports.configureSocketIO = function (app, db) {
  */
 
 module.exports.initMiddlewareSwagger = function(app) {
-
-
   var opts = {
     // Import swaggerDefinitions
     swaggerDefinition: {
@@ -261,8 +259,6 @@ module.exports.initMiddlewareSwagger = function(app) {
   var swagger = swaggerize(opts);
 
   app.use('/v2/api', swagger);
-
-
 };
 
 /**
