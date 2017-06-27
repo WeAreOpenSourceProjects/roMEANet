@@ -1,15 +1,20 @@
 language: node_js
-sudo: false
 dist: trusty
+sudo: false
 node_js:
-  - 6
-  - 7
+  - '6.10'
+  - '7'
+  - '8'
 matrix:
+  fast_finish: true
   allow_failures:
-    - node_js: 7
+    - node_js: '8'
 os:
   - linux
-# NodeJS v4 requires gcc 4.8
+  - centos
+  - macosx
+  - windows
+  # NodeJS v4 requires gcc 4.8
 env:
   - NODE_ENV=travis CXX="g++-4.8" CC="gcc-4.8"
 services:
