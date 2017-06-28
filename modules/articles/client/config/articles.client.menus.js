@@ -15,7 +15,7 @@
      * Globals vars
      */
     var _app = {
-      name: 'Articles',
+      title: 'Articles',
       version: '1.0.0',
       view: 'home', // app view
       state: 'articles.list', // link route
@@ -27,7 +27,7 @@
     };
 
     sideNavs.addSideNavItem('sidebar', {
-      title: _app.name,
+      title: _app.title,
       icon: _app.icon,
       color: _app.color,
       fontColor: _app.fontColor,

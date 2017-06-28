@@ -14,7 +14,7 @@
      * Globals vars
      */
     var _appAdmin = {
-      name: 'Manage Articles',
+      title: 'Manage Articles',
       version: '1.0.0',
       state: 'admin.articles.list', // main route
       icon: 'fa-lock', // https://fortawesome.github.io/Font-Awesome/
@@ -24,8 +24,8 @@
     /**
      * Nav Bar Top
      */
-    Navs.addNavItem('topbar', {
-      title: _appAdmin.name,
+    Navs.addSubNavItem('topbar', 'admin', {
+      title: _appAdmin.title,
       icon: _appAdmin.icon,
       state: _appAdmin.state,
       roles: _appAdmin.roles,

@@ -11,7 +11,9 @@
   function menuConfig(Navs) {
     Navs.addSubNavItem('topbar', 'admin', {
       title: 'Manage Users',
-      state: 'admin.users'
+      state: 'admin.users',
+      icon: 'fa-users', // https://fortawesome.github.io/Font-Awesome/
+      roles: ['admin']
     });
   }
 }());

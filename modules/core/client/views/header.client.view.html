@@ -11,20 +11,22 @@
       <ul class="navigation">
 
         <!-- Menu -->
-        <li ng-if="vm.nav.shouldRender(vm.authentication.user)" ng-repeat="item in vm.nav.items | orderBy: 'position'" ng-if="item.shouldRender(vm.authentication.user)" ng-switch="item.type" ng-class="{ active: $state.includes(item.state), drop: item.type === 'dropdown' }" class="item {{item.class}}" drop="item.type">
-          <a ng-switch-when="button" class="dropdown-button"><i class="fa {{item.icon}}"></i></a>
-          <md-menu ng-switch-when="dropdown-menu">
-            <a ng-click="vm.openMenu($mdMenu, $event)" class="toggle-button"><i class="fa {{item.icon}}"></i></a>
-            <md-menu-content width="2">
-              <md-menu-item ng-repeat="subitem in item.items | orderBy: 'position'" ng-if="subitem.shouldRender(vm.authentication.user);">
-                <md-button ui-sref="{{subitem.state}}">
-                  <i class="fa {{subitem.icon}}" md-menu-align-target></i>
-                  &nbsp;{{subitem.title}}
+        <li ng-repeat="item in vm.nav.items | orderBy: 'position'" ng-if="vm.nav.shouldRender(vm.authentication.user) && item.shouldRender(vm.authentication.user)" ng-switch="item.type" class="item">
+          <a ng-switch-default aria-label="{{item.state}}" ui-sref="{{item.state}}">
+            <i class="fa {{item.icon}}"></i>
+          </a>
+          <md-menu ng-switch-when="dropdown">
+            <a aria-label="{{item.state}}" ng-click="$mdOpenMenu($event);">
+              <i class="fa {{item.icon}}"></i>
+            </a>
+            <md-menu-content>
+              <md-menu-item ng-repeat="subitem in item.items | orderBy: 'position'">
+                <md-button aria-label="{{subitem.state}}" ui-sref="{{subitem.state}}">
+                  <i class="fa {{subitem.icon}}"></i> {{subitem.title}}
                 </md-button>
               </md-menu-item>
             </md-menu-content>
           </md-menu>
-          <a tooltipped ng-switch-default ui-sref="{{item.state}}" data-position="bottom" data-delay="550" data-tooltip="{{item.title}}" md-colors="{color: 'primary-500'}"><i class="fa {{item.icon}}"></i></a>
         </li>
 
         <!-- Auth -->
