@@ -14,6 +14,5 @@
     vm.isCollapsed = false;
     vm.isOpenTopMenu = false;
     vm.nav = Navs.getNav('topbar');
-
   }
 }());

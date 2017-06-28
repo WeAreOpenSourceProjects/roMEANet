@@ -38,10 +38,10 @@
     var _appAdmin = {
       name: 'Admin',
       version: '1.0.0',
-      state: 'admin.users', // main route
+      state: 'admin', // main route
       icon: 'fa-user-secret', // https://fortawesome.github.io/Font-Awesome/
-      roles: ['admin']
-      // type: 'dropdown'
+      roles: ['admin'],
+      type: 'dropdown-menu'
     };
 
     /**
@@ -54,6 +54,7 @@
       roles: _appAdmin.roles,
       type: _appAdmin.type
     });
+
     Navs.addNavItem('topbar_mobile', {
       title: _appMobileToolBox.name,
       icon: _appMobileToolBox.icon,
