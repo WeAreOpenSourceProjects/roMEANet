@@ -23,7 +23,7 @@
       color: '#3e454e', // https://flatuicolors.com/ (sideNav)
       fontColor: '#fff', // https://flatuicolors.com/ (sideNav)
       position: 1, // default 1
-      roles: ['*']
+      roles: ['*', 'user', 'admin']
     };
 
     sideNavs.addSideNavItem('sidebar', {
