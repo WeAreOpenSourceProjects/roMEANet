@@ -258,7 +258,7 @@ module.exports.initMiddlewareSwagger = function(app) {
   console.log('toot : ', path.resolve('./public/routes*.js'));
   var swagger = swaggerize(opts);
 
-  app.use('/v2/api', swagger);
+  app.use('/api/doc', swagger);
 };
 
 /**
