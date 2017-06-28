@@ -5,13 +5,15 @@ module.exports = {
     lib: {
       css: [
         // bower:css
-        'public/lib/angular-tooltips/dist/angular-tooltips.min.css',
         'public/lib/angular-material/angular-material.min.css',
-        'public/lib/angular-loading-bar/build/loading-bar.min.css',
+        'public/lib/font-awesome/css/font-awesome.min.css',
+        'public/lib/angular-tooltips/dist/angular-tooltips.min.css',
+        'public/lib/angular-loading-bar/build/loading-bar.min.css'
         // endbower
       ],
       js: [
         // bower:js
+        'public/lib/jquery/dist/jquery.min.js',
         'public/lib/angular/angular.min.js',
         'public/lib/angular-animate/angular-animate.min.js',
         'public/lib/angular-messages/angular-messages.min.js',
@@ -26,7 +28,7 @@ module.exports = {
         'public/lib/lodash/lodash.js',
         'public/lib/angular-loading-bar/build/loading-bar.min.js',
         'public/lib/angularUtils-pagination/dirPagination.js',
-        'public/lib/angular-sanitize/angular-sanitize.min.js',
+        'public/lib/angular-sanitize/angular-sanitize.min.js'
         // endbower
       ]
     },

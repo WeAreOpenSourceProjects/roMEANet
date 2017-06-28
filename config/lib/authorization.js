@@ -16,7 +16,9 @@ module.exports = auth;
 function authorizeRequest(req, res, next) {
   passport.authenticate('jwt', { session: false }, function (err, user) {
     if (err) {
-      return next(new Error(err));
+      return res.status(err.code).json({
+        message: err.message
+      });
     }
 
     if (user) {
