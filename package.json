@@ -29,7 +29,7 @@
     "test:client": "gulp test:client",
     "test:e2e": "gulp test:e2e",
     "test:coverage": "gulp test:coverage",
-    "postinstall": "bower install --allow-root && bower prune --allow-root",
+    "postinstall": "npm run bower",
     "generate-ssl-certs": "scripts/generate-ssl-certs.sh",
     "snyk-protect": "snyk protect",
     "prepublish": "npm run snyk-protect"
