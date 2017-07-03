@@ -36,6 +36,7 @@ before_install:
     -in deploy_key.enc -out deploy_key -d
   - npm install nsp -g
 #  - npm install snyk -g
+  - npm install protractor
   - 'export PATH=$PATH:/usr/lib/chromium-browser/'
   - 'export DISPLAY=:99.0'
   - 'sh -e /etc/init.d/xvfb start'
