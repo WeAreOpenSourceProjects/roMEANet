@@ -16,3 +16,6 @@ patch:
         patched: '2017-05-26T06:10:09.612Z'
     - socket.io > socket.io-adapter > socket.io-parser > debug > ms:
         patched: '2017-05-26T06:10:09.612Z'
+  'npm:debug:20170905':
+    - express-swaggerize > swagger-tools > body-parser > debug:
+        patched: '2017-10-06T06:10:10.010Z'
