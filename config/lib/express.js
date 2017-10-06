@@ -150,11 +150,11 @@ module.exports.initModulesConfiguration = function (app, db) {
 };
 
 /**
- * Configure Helmet headers configuration
- */
+* Configure Helmet headers configuration for security
+*/
 module.exports.initHelmetHeaders = function (app) {
   // Use helmet to secure Express headers
-  var SIX_MONTHS = 15778476000;
+  var SIX_MONTHS = 15778476;
   app.use(helmet.frameguard());
   app.use(helmet.xssFilter());
   app.use(helmet.noSniff());
