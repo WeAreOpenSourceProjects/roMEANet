@@ -31,8 +31,9 @@
     "test:coverage": "gulp test:coverage",
     "postinstall": "npm run bower",
     "generate-ssl-certs": "scripts/generate-ssl-certs.sh",
-    "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "seed": "gulp seed",
+    "seed:prod": "gulp seed:prod",
+    "seed:test": "gulp seed:test"
   },
   "dependencies": {
     "acl": "~0.4.10",
