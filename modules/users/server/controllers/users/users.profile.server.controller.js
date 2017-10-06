@@ -33,7 +33,13 @@ exports.update = function(req, res) {
           message: errorHandler.getErrorMessage(err)
         });
       } else {
-        res.json(user);
+        req.login(user, function(err) {
+          if (err) {
+            res.status(400).send(err);
+          } else {
+            res.json(user);
+          }
+        });
       }
     });
   } else {
@@ -103,7 +109,15 @@ exports.changeProfilePicture = function(req, res) {
       if (existingImageUrl !== User.schema.path('profileImageURL').defaultValue) {
         fs.unlink(existingImageUrl, function(unlinkError) {
           if (unlinkError) {
-            console.log(unlinkError);
+
+            // If file didn't exist, no need to reject promise
+            if (unlinkError.code === 'ENOENT') {
+              console.log('Removing profile image failed because file did not exist.');
+              return resolve();
+            }
+
+            console.error(unlinkError);
+
             reject({
               message: 'Error occurred while deleting old profile picture'
             });
@@ -114,6 +128,18 @@ exports.changeProfilePicture = function(req, res) {
       } else {
         resolve();
       }
+    });
+  }
+
+  function login() {
+    return new Promise(function(resolve, reject) {
+      req.login(user, function(err) {
+        if (err) {
+          res.status(400).send(err);
+        } else {
+          resolve();
+        }
+      });
     });
   }
 

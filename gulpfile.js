@@ -109,11 +109,10 @@ gulp.task('watch:server:run-tests', function() {
 
         if (filePath === path.resolve(file.path)) {
           changedTestFiles.push(f);
+          plugins.refresh.changed(f);
         }
       });
     });
-
-    plugins.refresh.changed();
   });
 });
 
@@ -153,7 +152,7 @@ gulp.task('uglify', function() {
   return gulp.src(assets)
     .pipe(plugins.ngAnnotate())
     .pipe(plugins.uglify({
-      mangle: false
+      mangle: true
     }))
     .pipe(plugins.concat('application.min.js'))
     .pipe(plugins.rev())
