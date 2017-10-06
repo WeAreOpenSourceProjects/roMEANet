@@ -11,7 +11,7 @@ var passport = require('passport'),
 /**
  * Module init function
  */
-module.exports = function (app, db) {
+module.exports = function (app) {
   // Initialize strategies
   config.utils.getGlobbedPaths(path.join(__dirname, './strategies/**/*.js')).forEach(function (strategy) {
     require(path.resolve(strategy))(config);
