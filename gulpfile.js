@@ -21,11 +21,7 @@ var _ = require('lodash'),
   wiredep = require('wiredep').stream,
   path = require('path'),
   endOfLine = require('os').EOL,
-  protractor = require('gulp-protractor').protractor,
-  webdriver_update = require('gulp-protractor').webdriver_update,
-  webdriver_standalone = require('gulp-protractor').webdriver_standalone,
   del = require('del'),
-  KarmaServer = require('karma').Server,
   semver = require('semver');
 
 // Local settings
@@ -153,7 +149,7 @@ gulp.task('uglify', function() {
     .pipe(plugins.ngAnnotate())
     .pipe(plugins.uglify({
       mangle: true
-    }).on('error', function (err) {
+    }).on('error', function(err) {
       console.log('Uglify error : ', err.toString());
     }))
     .pipe(plugins.concat('application.min.js'))
@@ -338,6 +334,7 @@ gulp.task('mocha:coverage', ['pre-test', 'mocha'], function() {
 
 // Karma test runner task
 gulp.task('karma', function(done) {
+  var KarmaServer = require('karma').Server;
   new KarmaServer({
     configFile: __dirname + '/karma.conf.js'
   }, done).start();
@@ -345,6 +342,7 @@ gulp.task('karma', function(done) {
 
 // Run karma with coverage options set and write report
 gulp.task('karma:coverage', function(done) {
+  var KarmaServer = require('karma').Server;
   new KarmaServer({
     configFile: __dirname + '/karma.conf.js',
     preprocessors: {
@@ -373,12 +371,12 @@ gulp.task('karma:coverage', function(done) {
 });
 
 // Drops the MongoDB database, used in e2e testing
-gulp.task('dropdb', function (done) {
+gulp.task('dropdb', function(done) {
   // Use mongoose configuration
   var mongooseService = require('./config/lib/mongoose');
 
-  mongooseService.connect(function (db) {
-    db.dropDatabase(function (err) {
+  mongooseService.connect(function(db) {
+    db.dropDatabase(function(err) {
       if (err) {
         console.error(err);
       } else {
@@ -391,12 +389,12 @@ gulp.task('dropdb', function (done) {
 });
 
 // Seed Mongo database based on configuration
-gulp.task('mongo-seed', function (done) {
+gulp.task('mongo-seed', function(done) {
   var db = require('./config/lib/mongoose');
   var seed = require('./config/lib/mongo-seed');
 
   // Open mongoose database connection
-  db.connect(function () {
+  db.connect(function() {
     db.loadModels();
 
     seed
@@ -405,12 +403,12 @@ gulp.task('mongo-seed', function (done) {
           logResults: true
         }
       })
-      .then(function () {
+      .then(function() {
         // Disconnect and finish task
         db.disconnect(done);
       })
-      .catch(function (err) {
-        db.disconnect(function (disconnectError) {
+      .catch(function(err) {
+        db.disconnect(function(disconnectError) {
           if (disconnectError) {
             console.log('Error disconnecting from the database, but was preceded by a Mongo Seed error.');
           }
@@ -424,15 +422,19 @@ gulp.task('mongo-seed', function (done) {
 });
 
 // Downloads the selenium webdriver if protractor version is compatible
-gulp.task('webdriver_update', webdriver_update);
-
+gulp.task('webdriver_update', function(done) {
+  return require('gulp-protractor').webdriver_update(done);
+});
 // Start the standalone selenium server
 // NOTE: This is not needed if you reference the
 // seleniumServerJar in your protractor.conf.js
-gulp.task('webdriver_standalone', webdriver_standalone);
+gulp.task('webdriver_standalone', function(done) {
+  return require('gulp-protractor').webdriver_standalone(done);
+});
 
 // Protractor test runner task
 gulp.task('protractor', ['webdriver_update'], function() {
+  var protractor = require('gulp-protractor').protractor;
   gulp.src([])
     .pipe(protractor({
       configFile: 'protractor.conf.js'
@@ -501,15 +503,15 @@ gulp.task('WeaosProd', function(done) {
 });
 
 // Run Mongo Seed with default environment config
-gulp.task('seed', function (done) {
+gulp.task('seed', function(done) {
   runSequence('env:dev', 'mongo-seed', done);
 });
 
 // Run Mongo Seed with production environment config
-gulp.task('seed:prod', function (done) {
+gulp.task('seed:prod', function(done) {
   runSequence('env:prod', 'mongo-seed', done);
 });
 
-gulp.task('seed:test', function (done) {
+gulp.task('seed:test', function(done) {
   runSequence('env:test', 'mongo-seed', done);
 });
