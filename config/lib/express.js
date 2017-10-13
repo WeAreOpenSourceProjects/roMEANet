@@ -20,8 +20,7 @@ var config = require('../config'),
   path = require('path'),
   _ = require('lodash'),
   lusca = require('lusca'),
-  authorization = require('./authorization'),
-  swaggerize = require('express-swaggerize');
+  authorization = require('./authorization');
 
 /**
  * Initialize local variables
@@ -232,38 +231,6 @@ module.exports.configureSocketIO = function (app, db) {
 };
 
 /**
- * Initialise Swagger
- */
-
-module.exports.initMiddlewareSwagger = function (app) {
-  var opts = {
-    // Import swaggerDefinitions
-    swaggerDefinition: {
-      info: { // API informations (required)
-        title: 'RoMeanEt', // Title (required)
-        version: '1.0.0', // Version (required)
-        description: 'A sample API 4 RoMeanEt made with <3' // Description (optional)
-      },
-      host: 'localhost:3000', // Host (optional)
-      basePath: '/api', // Base path (optional)
-      securityDefinitions: {
-        token: {
-          type: 'apiKey',
-          name: 'Authorization',
-          in: 'header'
-        }
-      }
-    },
-    // Path to the API docs
-    apiPaths: [path.resolve('./modules/*/server/routes/*.routes.js'), path.resolve('./modules/*/server/models/*.model.js')]
-  };
-  console.log('toot : ', path.resolve('./public/routes*.js'));
-  var swagger = swaggerize(opts);
-
-  app.use('/api/doc', swagger);
-};
-
-/**
  * Initialize the Express application
  */
 module.exports.init = function (db) {
@@ -287,9 +254,6 @@ module.exports.init = function (db) {
 
   // Initialize Express session
   this.initSession(app, db);
-
-  // Initialize Swagger
-  this.initMiddlewareSwagger(app);
 
   // Initialize Modules configuration
   this.initModulesConfiguration(app);
