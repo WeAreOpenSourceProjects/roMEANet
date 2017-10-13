@@ -28,7 +28,7 @@ module.exports = {
       sslCert: fs.readFileSync('./config/sslcerts/ssl-cert.pem'),
       sslKey: fs.readFileSync('./config/sslcerts/ssl-key.pem'),
       sslPass: '1234'
-      
+
       */
     },
     // Enable mongoose debug mode

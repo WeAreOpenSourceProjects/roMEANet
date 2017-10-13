@@ -1,7 +1,7 @@
-(function() {
+(function () {
   'use strict';
 
-  describe('Articles Admin Controller Tests', function() {
+  describe('Articles Admin Controller Tests', function () {
     // Initialize global variables
     var ArticlesAdminController,
       $scope,
@@ -17,11 +17,11 @@
     // the responses exactly. To solve the problem, we define a new toEqualData Jasmine matcher.
     // When the toEqualData matcher compares two objects, it takes only object properties into
     // account and ignores methods.
-    beforeEach(function() {
+    beforeEach(function () {
       jasmine.addMatchers({
-        toEqualData: function(util, customEqualityTesters) {
+        toEqualData: function (util, customEqualityTesters) {
           return {
-            compare: function(actual, expected) {
+            compare: function (actual, expected) {
               return {
                 pass: angular.equals(actual, expected)
               };
@@ -37,7 +37,7 @@
     // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
     // This allows us to inject a service but then attach it to a variable
     // with the same name as the service.
-    beforeEach(inject(function($controller, $rootScope, _$state_, _$httpBackend_, _Authentication_, _ArticlesService_, _$mdToast_) {
+    beforeEach(inject(function ($controller, $rootScope, _$state_, _$httpBackend_, _Authentication_, _ArticlesService_, _$mdToast_) {
       // Set a new global scope
       $scope = $rootScope.$new();
 
@@ -76,10 +76,10 @@
       spyOn($mdToast, 'show');
     }));
 
-    describe('vm.save() as create', function() {
+    describe('vm.save() as create', function () {
       var sampleArticlePostData;
 
-      beforeEach(function() {
+      beforeEach(function () {
         // Create a sample article object
         sampleArticlePostData = new ArticlesService({
           title: 'An Article about MEAN',
@@ -89,7 +89,7 @@
         $scope.vm.article = sampleArticlePostData;
       });
 
-      it('should send a POST request with the form input values and then locate to new object URL', inject(function(ArticlesService) {
+      it('should send a POST request with the form input values and then locate to new object URL', inject(function (ArticlesService) {
         // Set POST response
         $httpBackend.expectPOST('/api/articles', sampleArticlePostData).respond(mockArticle);
 
@@ -101,7 +101,7 @@
         expect($state.go).toHaveBeenCalledWith('admin.articles.list');
       }));
 
-      it('should set $scope.vm.error if error', function() {
+      it('should set $scope.vm.error if error', function () {
         var errorMessage = 'this is an error message';
         $httpBackend.expectPOST('/api/articles', sampleArticlePostData).respond(400, {
           message: errorMessage
@@ -114,13 +114,13 @@
       });
     });
 
-    describe('vm.save() as update', function() {
-      beforeEach(function() {
+    describe('vm.save() as update', function () {
+      beforeEach(function () {
         // Mock article in $scope
         $scope.vm.article = mockArticle;
       });
 
-      it('should update a valid article', inject(function(ArticlesService) {
+      it('should update a valid article', inject(function (ArticlesService) {
         // Set PUT response
         $httpBackend.expectPUT(/api\/articles\/([0-9a-fA-F]{24})$/).respond();
 
@@ -132,7 +132,7 @@
         expect($state.go).toHaveBeenCalledWith('admin.articles.list');
       }));
 
-      it('should set $scope.vm.error if error', inject(function(ArticlesService) {
+      it('should set $scope.vm.error if error', inject(function (ArticlesService) {
         var errorMessage = 'error';
         $httpBackend.expectPUT(/api\/articles\/([0-9a-fA-F]{24})$/).respond(400, {
           message: errorMessage
@@ -145,13 +145,13 @@
       }));
     });
 
-    describe('vm.remove()', function() {
-      beforeEach(function() {
+    describe('vm.remove()', function () {
+      beforeEach(function () {
         // Setup articles
         $scope.vm.article = mockArticle;
       });
 
-      it('should delete the article and redirect to articles', function() {
+      it('should delete the article and redirect to articles', function () {
         // Return true on confirm message
         spyOn(window, 'confirm').and.returnValue(true);
 
@@ -163,7 +163,7 @@
         expect($state.go).toHaveBeenCalledWith('admin.articles.list');
       });
 
-      it('should should not delete the article and not redirect', function() {
+      it('should should not delete the article and not redirect', function () {
         // Return false on confirm message
         spyOn(window, 'confirm').and.returnValue(false);
 

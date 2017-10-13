@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Users E2E Tests:', function() {
+describe('Users E2E Tests:', function () {
   var user1 = {
     firstName: 'test',
     lastName: 'user',
@@ -17,7 +17,7 @@ describe('Users E2E Tests:', function() {
     password: 'P@$$w0rd!!'
   };
 
-  var signout = function() {
+  var signout = function () {
     // Make sure user is signed out first
     browser.get('http://localhost:3001/authentication/signout');
     // Delete all cookies
@@ -26,9 +26,9 @@ describe('Users E2E Tests:', function() {
     browser.executeScript('localStorage.clear();');
   };
 
-  describe('Signup Validation', function() {
+  describe('Signup Validation', function () {
 
-    it('Should report missing first name', function() {
+    it('Should report missing first name', function () {
       browser.get('http://localhost:3001/authentication/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys('');
@@ -46,7 +46,7 @@ describe('Users E2E Tests:', function() {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('First name is required.');
     });
 
-    it('Should report missing last name', function() {
+    it('Should report missing last name', function () {
       browser.get('http://localhost:3001/authentication/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
@@ -64,7 +64,7 @@ describe('Users E2E Tests:', function() {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Last name is required.');
     });
 
-    it('Should report missing email address', function() {
+    it('Should report missing email address', function () {
       browser.get('http://localhost:3001/authentication/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
@@ -82,7 +82,7 @@ describe('Users E2E Tests:', function() {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Email address is required.');
     });
 
-    it('Should report invalid email address - "123"', function() {
+    it('Should report invalid email address - "123"', function () {
       browser.get('http://localhost:3001/authentication/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
@@ -104,7 +104,7 @@ describe('Users E2E Tests:', function() {
      * Note: 123@123 is a valid email adress according to HTML5.
      * However, 123@123@123 is an invalid email address.
      */
-    it('Should report invalid email address - "123@123@123"', function() {
+    it('Should report invalid email address - "123@123@123"', function () {
       browser.get('http://localhost:3001/authentication/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
@@ -123,7 +123,7 @@ describe('Users E2E Tests:', function() {
     });
 
 
-    it('Should report invalid username - ".login"', function() {
+    it('Should report invalid username - ".login"', function () {
       browser.get('http://localhost:3001/authentication/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
@@ -141,7 +141,7 @@ describe('Users E2E Tests:', function() {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Please enter a valid username: 3+ characters long, non restricted word, characters "_-.", no consecutive dots, does not begin or end with dots, letters a-z and numbers 0-9.');
     });
 
-    it('Should report invalid username - "login."', function() {
+    it('Should report invalid username - "login."', function () {
       browser.get('http://localhost:3001/authentication/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
@@ -159,7 +159,7 @@ describe('Users E2E Tests:', function() {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Please enter a valid username: 3+ characters long, non restricted word, characters "_-.", no consecutive dots, does not begin or end with dots, letters a-z and numbers 0-9.');
     });
 
-    it('Should report invalid username - "log..in"', function() {
+    it('Should report invalid username - "log..in"', function () {
       browser.get('http://localhost:3001/authentication/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
@@ -177,7 +177,7 @@ describe('Users E2E Tests:', function() {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Please enter a valid username: 3+ characters long, non restricted word, characters "_-.", no consecutive dots, does not begin or end with dots, letters a-z and numbers 0-9.');
     });
 
-    it('Should report invalid username - "lo"', function() {
+    it('Should report invalid username - "lo"', function () {
       browser.get('http://localhost:3001/authentication/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
@@ -195,7 +195,7 @@ describe('Users E2E Tests:', function() {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Please enter a valid username: 3+ characters long, non restricted word, characters "_-.", no consecutive dots, does not begin or end with dots, letters a-z and numbers 0-9.');
     });
 
-    it('Should report invalid username - "log$in"', function() {
+    it('Should report invalid username - "log$in"', function () {
       browser.get('http://localhost:3001/authentication/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
@@ -213,7 +213,7 @@ describe('Users E2E Tests:', function() {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Please enter a valid username: 3+ characters long, non restricted word, characters "_-.", no consecutive dots, does not begin or end with dots, letters a-z and numbers 0-9.');
     });
 
-    it('Should signup username with . - "log.in"', function() {
+    it('Should signup username with . - "log.in"', function () {
       browser.get('http://localhost:3001/authentication/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user2.firstName);
@@ -233,7 +233,7 @@ describe('Users E2E Tests:', function() {
       signout();
     });
 
-    it('Should report missing username', function() {
+    it('Should report missing username', function () {
       browser.get('http://localhost:3001/authentication/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
@@ -249,7 +249,7 @@ describe('Users E2E Tests:', function() {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Username is required.');
     });
 
-    it('Should report a password with less than 10 characters long - "P@$$w0rd!"', function() {
+    it('Should report a password with less than 10 characters long - "P@$$w0rd!"', function () {
       browser.get('http://localhost:3001/authentication/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
@@ -267,7 +267,7 @@ describe('Users E2E Tests:', function() {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password must be at least 10 characters long.');
     });
 
-    it('Should report a password with greater than 128 characters long.', function() {
+    it('Should report a password with greater than 128 characters long.', function () {
       browser.get('http://localhost:3001/authentication/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
@@ -285,7 +285,7 @@ describe('Users E2E Tests:', function() {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password must be fewer than 128 characters.');
     });
 
-    it('Should report a password with more than 3 or more repeating characters - "P@$$w0rd!!!"', function() {
+    it('Should report a password with more than 3 or more repeating characters - "P@$$w0rd!!!"', function () {
       browser.get('http://localhost:3001/authentication/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
@@ -303,7 +303,7 @@ describe('Users E2E Tests:', function() {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password may not contain sequences of three or more repeated characters.');
     });
 
-    it('Should report a password with no uppercase letters - "p@$$w0rd!!"', function() {
+    it('Should report a password with no uppercase letters - "p@$$w0rd!!"', function () {
       browser.get('http://localhost:3001/authentication/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
@@ -321,7 +321,7 @@ describe('Users E2E Tests:', function() {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password must contain at least one uppercase letter.');
     });
 
-    it('Should report a password with less than one number - "P@$$word!!"', function() {
+    it('Should report a password with less than one number - "P@$$word!!"', function () {
       browser.get('http://localhost:3001/authentication/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
@@ -339,7 +339,7 @@ describe('Users E2E Tests:', function() {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password must contain at least one number.');
     });
 
-    it('Should report a password with less than one special character - "Passw0rdss"', function() {
+    it('Should report a password with less than one special character - "Passw0rdss"', function () {
       browser.get('http://localhost:3001/authentication/signup');
       // Enter First Name
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
@@ -357,7 +357,7 @@ describe('Users E2E Tests:', function() {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password must contain at least one special character.');
     });
 
-    it('Should Successfully register new user', function() {
+    it('Should Successfully register new user', function () {
       browser.get('http://localhost:3001/authentication/signup');
       // Enter FirstName
       element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
@@ -374,7 +374,7 @@ describe('Users E2E Tests:', function() {
       expect(browser.getCurrentUrl()).toEqual('http://localhost:3001/');
     });
 
-    it('Should report Email already exists', function() {
+    it('Should report Email already exists', function () {
       // Make sure user is signed out first
       signout();
       // Signup
@@ -395,7 +395,7 @@ describe('Users E2E Tests:', function() {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Email already exists');
     });
 
-    it('Should report Username already exists', function() {
+    it('Should report Username already exists', function () {
       // Signup
       browser.get('http://localhost:3001/authentication/signup');
       // Enter First Name
@@ -416,9 +416,9 @@ describe('Users E2E Tests:', function() {
 
   });
 
-  describe('Signin Validation', function() {
+  describe('Signin Validation', function () {
 
-    it('Should report missing credentials', function() {
+    it('Should report missing credentials', function () {
       // Make sure user is signed out first
       signout();
       // Sign in
@@ -431,7 +431,7 @@ describe('Users E2E Tests:', function() {
       expect(element.all(by.css('.error-text')).get(1).getText()).toBe('Password is required.');
     });
 
-    it('Verify that the user is logged in', function() {
+    it('Verify that the user is logged in', function () {
       // Make sure user is signed out first
       signout();
       // Sign in
@@ -447,9 +447,9 @@ describe('Users E2E Tests:', function() {
 
   });
 
-  describe('Change Password Settings Validation', function() {
+  describe('Change Password Settings Validation', function () {
 
-    it('Should report missing passwords', function() {
+    it('Should report missing passwords', function () {
       browser.get('http://localhost:3001/settings/password');
       // Click Submit button
       element(by.css('button[type=submit]')).click();
@@ -459,7 +459,7 @@ describe('Users E2E Tests:', function() {
       expect(element.all(by.css('.error-text')).get(2).getText()).toBe('Verify your new password.');
     });
 
-    it('Should report a password with less than 10 characters long - "P@$$w0rd!"', function() {
+    it('Should report a password with less than 10 characters long - "P@$$w0rd!"', function () {
       browser.get('http://localhost:3001/settings/password');
       // Enter Current Password
       element(by.model('vm.passwordDetails.currentPassword')).sendKeys(user1.password);
@@ -471,7 +471,7 @@ describe('Users E2E Tests:', function() {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password must be at least 10 characters long.');
     });
 
-    it('Should report a password with greater than 128 characters long.', function() {
+    it('Should report a password with greater than 128 characters long.', function () {
       browser.get('http://localhost:3001/settings/password');
       // Enter Current Password
       element(by.model('vm.passwordDetails.currentPassword')).sendKeys(user1.password);
@@ -483,7 +483,7 @@ describe('Users E2E Tests:', function() {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password must be fewer than 128 characters.');
     });
 
-    it('Should report a password with more than 3 or more repeating characters - "P@$$w0rd!!!"', function() {
+    it('Should report a password with more than 3 or more repeating characters - "P@$$w0rd!!!"', function () {
       browser.get('http://localhost:3001/settings/password');
       // Enter Current Password
       element(by.model('vm.passwordDetails.currentPassword')).sendKeys(user1.password);
@@ -495,7 +495,7 @@ describe('Users E2E Tests:', function() {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password may not contain sequences of three or more repeated characters.');
     });
 
-    it('Should report a password with no uppercase letters - "p@$$w0rd!!"', function() {
+    it('Should report a password with no uppercase letters - "p@$$w0rd!!"', function () {
       browser.get('http://localhost:3001/settings/password');
       // Enter Current Password
       element(by.model('vm.passwordDetails.currentPassword')).sendKeys(user1.password);
@@ -507,7 +507,7 @@ describe('Users E2E Tests:', function() {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password must contain at least one uppercase letter.');
     });
 
-    it('Should report a password with less than one number - "P@$$word!!"', function() {
+    it('Should report a password with less than one number - "P@$$word!!"', function () {
       browser.get('http://localhost:3001/settings/password');
       // Enter Current Password
       element(by.model('vm.passwordDetails.currentPassword')).sendKeys(user1.password);
@@ -519,7 +519,7 @@ describe('Users E2E Tests:', function() {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password must contain at least one number.');
     });
 
-    it('Should report a password with less than one special character - "Passw0rdss"', function() {
+    it('Should report a password with less than one special character - "Passw0rdss"', function () {
       browser.get('http://localhost:3001/settings/password');
       // Enter Current Password
       element(by.model('vm.passwordDetails.currentPassword')).sendKeys(user1.password);
@@ -531,7 +531,7 @@ describe('Users E2E Tests:', function() {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password must contain at least one special character.');
     });
 
-    it('Should report passwords do not match', function() {
+    it('Should report passwords do not match', function () {
       browser.get('http://localhost:3001/settings/password');
       // Enter Current Password
       element(by.model('vm.passwordDetails.currentPassword')).sendKeys(user1.password);
@@ -545,7 +545,7 @@ describe('Users E2E Tests:', function() {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('Passwords do not match.');
     });
 
-    it('Should change the password to - "P@$$w0rds!!"', function() {
+    it('Should change the password to - "P@$$w0rds!!"', function () {
       browser.get('http://localhost:3001/settings/password');
       // Enter Current Password
       element(by.model('vm.passwordDetails.currentPassword')).sendKeys(user1.password);

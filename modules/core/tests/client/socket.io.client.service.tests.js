@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   /* Creates a mock of socket.io for the browser.
@@ -26,8 +26,7 @@
       io.socket = {};
 
       // Mock authentication
-      io.on('authentication', function (msg, data) {
-      });
+      io.on('authentication', function (msg, data) {});
     }
 
     function emit(msg, data) {

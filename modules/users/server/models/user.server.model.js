@@ -27,7 +27,9 @@ var validateLocalStrategyProperty = function (property) {
  * A Validation function for local strategy email
  */
 var validateLocalStrategyEmail = function (email) {
-  return ((this.provider !== 'local' && !this.updated) || validator.isEmail(email, { require_tld: false }));
+  return ((this.provider !== 'local' && !this.updated) || validator.isEmail(email, {
+    require_tld: false
+  }));
 };
 
 /**
@@ -40,7 +42,7 @@ var validateLocalStrategyEmail = function (email) {
  * - not begin or end with "."
  */
 
-var validateUsername = function(username) {
+var validateUsername = function (username) {
   var usernameRegex = /^(?=[\w.-]+$)(?!.*[._-]{2})(?!\.)(?!.*\.$).{3,34}$/;
   return (
     this.provider !== 'local' ||
@@ -196,10 +198,10 @@ UserSchema.statics.findUniqueUsername = function (username, suffix, callback) {
 };
 
 /**
-* Generates a random passphrase that passes the owasp test
-* Returns a promise that resolves with the generated passphrase, or rejects with an error if something goes wrong.
-* NOTE: Passphrases are only tested against the required owasp strength tests, and not the optional tests.
-*/
+ * Generates a random passphrase that passes the owasp test
+ * Returns a promise that resolves with the generated passphrase, or rejects with an error if something goes wrong.
+ * NOTE: Passphrases are only tested against the required owasp strength tests, and not the optional tests.
+ */
 UserSchema.statics.generateRandomPassphrase = function () {
   return new Promise(function (resolve, reject) {
     var password = '';
@@ -236,9 +238,9 @@ UserSchema.statics.seed = seed;
 mongoose.model('User', UserSchema);
 
 /**
-* Seeds the User collection with document (User)
-* and provided options.
-*/
+ * Seeds the User collection with document (User)
+ * and provided options.
+ */
 function seed(doc, options) {
   var User = mongoose.model('User');
 

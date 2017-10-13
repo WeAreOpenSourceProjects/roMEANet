@@ -1,8 +1,8 @@
 'use strict';
 
-(function() {
+(function () {
   // Password controller Spec
-  describe('PasswordController', function() {
+  describe('PasswordController', function () {
     // Initialize global variables
     var PasswordController,
       scope,
@@ -12,11 +12,11 @@
       $location,
       $window;
 
-    beforeEach(function() {
+    beforeEach(function () {
       jasmine.addMatchers({
-        toEqualData: function(util, customEqualityTesters) {
+        toEqualData: function (util, customEqualityTesters) {
           return {
-            compare: function(actual, expected) {
+            compare: function (actual, expected) {
               return {
                 pass: angular.equals(actual, expected)
               };
@@ -29,8 +29,8 @@
     // Load the main application module
     beforeEach(module(ApplicationConfiguration.applicationModuleName));
 
-    describe('Logged in user', function() {
-      beforeEach(inject(function($controller, $rootScope, _Authentication_, _$stateParams_, _$httpBackend_, _$location_) {
+    describe('Logged in user', function () {
+      beforeEach(inject(function ($controller, $rootScope, _Authentication_, _$stateParams_, _$httpBackend_, _$location_) {
         // Set a new global scope
         scope = $rootScope.$new();
 
@@ -41,7 +41,12 @@
         $location = _$location_;
         $location.path = jasmine.createSpy().and.returnValue(true);
 
-        $httpBackend.whenGET('/api/users/me').respond({ user: { username: 'test', roles: ['user'] } });
+        $httpBackend.whenGET('/api/users/me').respond({
+          user: {
+            username: 'test',
+            roles: ['user']
+          }
+        });
 
         // Ignore parent template gets on state transition
         $httpBackend.whenGET('/modules/core/client/views/404.client.view.html').respond(200);
@@ -62,13 +67,13 @@
         Authentication.signout();
       }));
 
-      it('should redirect logged in user to home', function() {
+      it('should redirect logged in user to home', function () {
         expect($location.path).toHaveBeenCalledWith('/');
       });
     });
 
-    describe('Logged out user', function() {
-      beforeEach(inject(function($controller, $rootScope, _Authentication_, _$stateParams_, _$httpBackend_, _$location_) {
+    describe('Logged out user', function () {
+      beforeEach(inject(function ($controller, $rootScope, _Authentication_, _$stateParams_, _$httpBackend_, _$location_) {
         // Set a new global scope
         scope = $rootScope.$new();
 
@@ -80,7 +85,9 @@
         $location.path = jasmine.createSpy().and.returnValue(true);
         Authentication.user = null;
 
-        $httpBackend.whenGET('/api/users/me').respond({ user: null });
+        $httpBackend.whenGET('/api/users/me').respond({
+          user: null
+        });
 
         // Ignore parent template gets on state transition
         $httpBackend.whenGET('/modules/core/client/views/404.client.view.html').respond(200);
@@ -96,20 +103,20 @@
         Authentication.signout();
       }));
 
-      it('should not redirect to home', function() {
+      it('should not redirect to home', function () {
         expect($location.path).not.toHaveBeenCalledWith('/');
       });
 
-      describe('askForPasswordReset', function() {
+      describe('askForPasswordReset', function () {
         var credentials = {
           username: 'test',
           password: 'P@ssw0rd!!'
         };
-        beforeEach(function() {
+        beforeEach(function () {
           scope.vm.credentials = credentials;
         });
 
-        it('should clear scope.success and scope.error', function() {
+        it('should clear scope.success and scope.error', function () {
           scope.vm.success = 'test';
           scope.vm.error = 'test';
           scope.vm.askForPasswordReset(true);
@@ -118,9 +125,9 @@
           expect(scope.vm.error).toBeNull();
         });
 
-        describe('POST error', function() {
+        describe('POST error', function () {
           var errorMessage = 'No account with that username has been found';
-          beforeEach(function() {
+          beforeEach(function () {
             $httpBackend.when('POST', '/api/auth/forgot', credentials).respond(400, {
               'message': errorMessage
             });
@@ -129,18 +136,18 @@
             $httpBackend.flush();
           });
 
-          it('should clear form', function() {
+          it('should clear form', function () {
             expect(scope.vm.credentials).toBe(null);
           });
 
-          it('should set error to response message', function() {
+          it('should set error to response message', function () {
             expect(scope.vm.error).toBe(errorMessage);
           });
         });
 
-        describe('POST success', function() {
+        describe('POST success', function () {
           var successMessage = 'An email has been sent to the provided email with further instructions.';
-          beforeEach(function() {
+          beforeEach(function () {
             $httpBackend.when('POST', '/api/auth/forgot', credentials).respond({
               'message': successMessage
             });
@@ -149,27 +156,27 @@
             $httpBackend.flush();
           });
 
-          it('should clear form', function() {
+          it('should clear form', function () {
             expect(scope.vm.credentials).toBe(null);
           });
 
-          it('should set success to response message', function() {
+          it('should set success to response message', function () {
             expect(scope.vm.success).toBe(successMessage);
           });
         });
       });
 
-      describe('resetUserPassword', function() {
+      describe('resetUserPassword', function () {
         var token = 'testToken';
         var passwordDetails = {
           password: 'test'
         };
-        beforeEach(function() {
+        beforeEach(function () {
           $stateParams.token = token;
           scope.vm.passwordDetails = passwordDetails;
         });
 
-        it('should clear scope.success and scope.vm.error', function() {
+        it('should clear scope.success and scope.vm.error', function () {
           scope.vm.success = 'test';
           scope.vm.error = 'test';
           scope.vm.resetUserPassword(true);
@@ -178,7 +185,7 @@
           expect(scope.vm.error).toBeNull();
         });
 
-        it('POST error should set scope.error to response message', function() {
+        it('POST error should set scope.error to response message', function () {
           var errorMessage = 'Passwords do not match';
           $httpBackend.when('POST', '/api/auth/reset/' + token, passwordDetails).respond(400, {
             'message': errorMessage
@@ -190,26 +197,28 @@
           expect(scope.vm.error).toBe(errorMessage);
         });
 
-        describe('POST success', function() {
+        describe('POST success', function () {
           var user = {
             username: 'test'
           };
-          beforeEach(function() {
-            $httpBackend.when('POST', '/api/auth/reset/' + token, passwordDetails).respond({ user: user });
+          beforeEach(function () {
+            $httpBackend.when('POST', '/api/auth/reset/' + token, passwordDetails).respond({
+              user: user
+            });
 
             scope.vm.resetUserPassword(true);
             $httpBackend.flush();
           });
 
-          it('should clear password form', function() {
+          it('should clear password form', function () {
             expect(scope.vm.passwordDetails).toBe(null);
           });
 
-          it('should attach user profile', function() {
+          it('should attach user profile', function () {
             expect(scope.vm.authentication.user).toEqual(user);
           });
 
-          it('should redirect to password reset success view', function() {
+          it('should redirect to password reset success view', function () {
             expect($location.path).toHaveBeenCalledWith('/password/reset/success');
           });
         });

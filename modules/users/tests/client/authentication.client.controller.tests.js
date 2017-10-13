@@ -57,7 +57,9 @@
         it('should login with a correct user and password', inject(function ($templateCache) {
           $templateCache.put('/modules/core/client/views/home.client.view.html', '');
           // Test expected GET request
-          $httpBackend.when('POST', '/api/auth/signin').respond(200, { user: 'Fred' });
+          $httpBackend.when('POST', '/api/auth/signin').respond(200, {
+            user: 'Fred'
+          });
           $httpBackend.when('GET', '/api/users/me').respond(200, 'Fred');
 
           scope.vm.signin(true);
@@ -71,7 +73,9 @@
         it('should login with a correct email and password', inject(function ($templateCache) {
           $templateCache.put('/modules/core/client/views/home.client.view.html', '');
           // Test expected GET request
-          $httpBackend.when('POST', '/api/auth/signin').respond(200, { user: 'Fred@email.com' });
+          $httpBackend.when('POST', '/api/auth/signin').respond(200, {
+            user: 'Fred@email.com'
+          });
           $httpBackend.when('GET', '/api/users/me').respond(200, 'Fred');
 
           scope.vm.signin(true);
@@ -97,8 +101,12 @@
             spyOn($state, 'go');
 
             // Test expected GET request
-            $httpBackend.when('POST', '/api/auth/signin').respond(200, { user: 'Fred' });
-            $httpBackend.when('GET', '/api/users/me').respond(200, { user: 'Fred' });
+            $httpBackend.when('POST', '/api/auth/signin').respond(200, {
+              user: 'Fred'
+            });
+            $httpBackend.when('GET', '/api/users/me').respond(200, {
+              user: 'Fred'
+            });
 
             scope.vm.signin(true);
             $httpBackend.flush();
@@ -145,8 +153,12 @@
           $templateCache.put('/modules/core/client/views/home.client.view.html', '');
           // Test expected GET request
           scope.vm.authentication.user = 'Fred';
-          $httpBackend.when('POST', '/api/auth/signup').respond(200, { user: 'Fred' });
-          $httpBackend.when('GET', '/api/users/me').respond(200, { user: 'Fred' });
+          $httpBackend.when('POST', '/api/auth/signup').respond(200, {
+            user: 'Fred'
+          });
+          $httpBackend.when('GET', '/api/users/me').respond(200, {
+            user: 'Fred'
+          });
 
           scope.vm.signup(true);
           $httpBackend.flush();

@@ -66,7 +66,7 @@ module.exports.initMiddleware = function (app) {
   }));
 
 
-  app.use(function(req, res, next) {
+  app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     res.header('Access-Control-Allow-Methods', 'PUT, DELETE, OPTIONS');
@@ -150,8 +150,8 @@ module.exports.initModulesConfiguration = function (app) {
 };
 
 /**
-* Configure Helmet headers configuration for security
-*/
+ * Configure Helmet headers configuration for security
+ */
 module.exports.initHelmetHeaders = function (app) {
   // Use helmet to secure Express headers
   var SIX_MONTHS = 15778476;
@@ -172,7 +172,9 @@ module.exports.initHelmetHeaders = function (app) {
  */
 module.exports.initModulesClientRoutes = function (app) {
   // Setting the app router and static folder
-  app.use('/', express.static(path.resolve('./public'), { maxAge: 86400000 }));
+  app.use('/', express.static(path.resolve('./public'), {
+    maxAge: 86400000
+  }));
 
   // Globbing static routing
   config.folders.client.forEach(function (staticPath) {
@@ -233,7 +235,7 @@ module.exports.configureSocketIO = function (app, db) {
  * Initialise Swagger
  */
 
-module.exports.initMiddlewareSwagger = function(app) {
+module.exports.initMiddlewareSwagger = function (app) {
   var opts = {
     // Import swaggerDefinitions
     swaggerDefinition: {
