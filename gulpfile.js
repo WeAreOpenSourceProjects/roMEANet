@@ -282,9 +282,9 @@ gulp.task('mocha', function (done) {
   var error;
 
   // Connect mongoose
-  mongooseService.connect(function () {
+  mongooseService.connect(function (db) {
+    // Load mongoose models
     mongooseService.loadModels();
-    // Run the tests
     gulp.src(testSuites)
       .pipe(plugins.mocha({
         reporter: 'spec',
@@ -295,7 +295,6 @@ gulp.task('mocha', function (done) {
         error = err;
       })
       .on('end', function () {
-        // When the tests are done, disconnect mongoose and pass the error state back to gulp
         mongooseService.disconnect(function (err) {
           if (err) {
             console.log('Error disconnecting from database');

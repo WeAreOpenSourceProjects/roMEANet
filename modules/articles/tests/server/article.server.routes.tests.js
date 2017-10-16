@@ -255,6 +255,7 @@ describe('Article CRUD tests', function () {
           // Save a new article
           agent.post('/api/articles')
             .send(article)
+            .set('Authorization', 'JWT ' + signinRes.body.token)
             .expect(200)
             .end(function (articleSaveErr, articleSaveRes) {
               // Handle article save error
@@ -281,6 +282,7 @@ describe('Article CRUD tests', function () {
 
                     // Get the article
                     agent.get('/api/articles/' + articleSaveRes.body._id)
+                      .set('Authorization', 'JWT ' + res.body.token)
                       .expect(200)
                       .end(function (articleInfoErr, articleInfoRes) {
                         // Handle article error
@@ -364,6 +366,7 @@ describe('Article CRUD tests', function () {
 
           // Save a new article
           agent.post('/api/articles')
+            .set('Authorization', 'JWT ' + signinRes.body.token)
             .send(article)
             .expect(200)
             .end(function (articleSaveErr, articleSaveRes) {
@@ -389,6 +392,7 @@ describe('Article CRUD tests', function () {
 
                   // Get the article
                   agent.get('/api/articles/' + articleSaveRes.body._id)
+                    .set('Authorization', 'JWT ' + res.body.token)
                     .expect(200)
                     .end(function (articleInfoErr, articleInfoRes) {
                       // Handle article error

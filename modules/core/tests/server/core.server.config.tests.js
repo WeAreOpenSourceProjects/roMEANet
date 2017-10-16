@@ -709,9 +709,7 @@ describe('Configuration Tests:', function () {
 
   describe('Testing Session Secret Configuration', function () {
     it('should warn if using default session secret when running in production', function (done) {
-      var conf = {
-        sessionSecret: 'MEAN'
-      };
+      var conf = { sessionSecret: 'roMEANet' };
       // set env to production for this test
       process.env.NODE_ENV = 'production';
       config.utils.validateSessionSecret(conf, true).should.equal(false);
