@@ -1,5 +1,5 @@
 ﻿
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -20,7 +20,7 @@
     // Remove existing Article
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
-        vm.article.$remove(function() {
+        vm.article.$remove(function () {
           $state.go('admin.articles.list');
           $mdToast.show($mdToast.simple().textContent('Article deleted successfully!').position('top right').hideDelay(5000));
         });

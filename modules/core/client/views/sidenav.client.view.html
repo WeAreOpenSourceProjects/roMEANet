@@ -35,7 +35,7 @@
       <div class="user">
         <div ng-show="vm.authentication.user">
           <a ui-sref="settings.profile" ng-click="vm.menuClick()">
-          <img ng-src="/{{vm.authentication.user.profileImageURL}}" alt="{{vm.authentication.user.displayName}}" class="image" />
+          <img ng-src="{{vm.authentication.user.profileImageURL}}" alt="{{vm.authentication.user.displayName}}" class="image" />
           <span>{{vm.authentication.user.displayName}}</span>
         </a>
         </div>

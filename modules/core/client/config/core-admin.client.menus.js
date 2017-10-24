@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -30,8 +30,8 @@
       icon: 'fa-cog', // https://fortawesome.github.io/Font-Awesome/
       color: '#24272d', // https://flatuicolors.com/ (sideNav)
       fontColor: '#fff', // https://flatuicolors.com/ (sideNav)
-    //  type: 'dropdown-menu',
-    //  position: 0, // default 1
+      //  type: 'dropdown-menu',
+      //  position: 0, // default 1
       roles: ['*']
     };
     var _appAdmin = {

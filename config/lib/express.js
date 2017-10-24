@@ -20,8 +20,7 @@ var config = require('../config'),
   path = require('path'),
   _ = require('lodash'),
   lusca = require('lusca'),
-  authorization = require('./authorization'),
-  swaggerize = require('express-swaggerize');
+  authorization = require('./authorization');
 
 /**
  * Initialize local variables
@@ -66,7 +65,7 @@ module.exports.initMiddleware = function (app) {
   }));
 
 
-  app.use(function(req, res, next) {
+  app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     res.header('Access-Control-Allow-Methods', 'PUT, DELETE, OPTIONS');
@@ -131,7 +130,7 @@ module.exports.initSession = function (app, db) {
     },
     name: config.sessionKey,
     store: new MongoStore({
-      mongooseConnection: db.connection,
+      db: db,
       collection: config.sessionCollection
     })
   }));
@@ -143,18 +142,18 @@ module.exports.initSession = function (app, db) {
 /**
  * Invoke modules server configuration
  */
-module.exports.initModulesConfiguration = function (app, db) {
+module.exports.initModulesConfiguration = function (app) {
   config.files.server.configs.forEach(function (configPath) {
-    require(path.resolve(configPath))(app, db);
+    require(path.resolve(configPath))(app);
   });
 };
 
 /**
- * Configure Helmet headers configuration
+ * Configure Helmet headers configuration for security
  */
 module.exports.initHelmetHeaders = function (app) {
   // Use helmet to secure Express headers
-  var SIX_MONTHS = 15778476000;
+  var SIX_MONTHS = 15778476;
   app.use(helmet.frameguard());
   app.use(helmet.xssFilter());
   app.use(helmet.noSniff());
@@ -172,7 +171,9 @@ module.exports.initHelmetHeaders = function (app) {
  */
 module.exports.initModulesClientRoutes = function (app) {
   // Setting the app router and static folder
-  app.use('/', express.static(path.resolve('./public'), { maxAge: 86400000 }));
+  app.use('/', express.static(path.resolve('./public'), {
+    maxAge: 86400000
+  }));
 
   // Globbing static routing
   config.folders.client.forEach(function (staticPath) {
@@ -230,38 +231,6 @@ module.exports.configureSocketIO = function (app, db) {
 };
 
 /**
- * Initialise Swagger
- */
-
-module.exports.initMiddlewareSwagger = function(app) {
-  var opts = {
-    // Import swaggerDefinitions
-    swaggerDefinition: {
-      info: { // API informations (required)
-        title: 'RoMeanEt', // Title (required)
-        version: '1.0.0', // Version (required)
-        description: 'A sample API 4 RoMeanEt made with <3' // Description (optional)
-      },
-      host: 'localhost:3000', // Host (optional)
-      basePath: '/api', // Base path (optional)
-      securityDefinitions: {
-        token: {
-          type: 'apiKey',
-          name: 'Authorization',
-          in: 'header'
-        }
-      }
-    },
-    // Path to the API docs
-    apiPaths: [path.resolve('./modules/*/server/routes/*.routes.js'), path.resolve('./modules/*/server/models/*.model.js')]
-  };
-  console.log('toot : ', path.resolve('./public/routes*.js'));
-  var swagger = swaggerize(opts);
-
-  app.use('/api/doc', swagger);
-};
-
-/**
  * Initialize the Express application
  */
 module.exports.init = function (db) {
@@ -285,9 +254,6 @@ module.exports.init = function (db) {
 
   // Initialize Express session
   this.initSession(app, db);
-
-  // Initialize Swagger
-  this.initMiddlewareSwagger(app);
 
   // Initialize Modules configuration
   this.initModulesConfiguration(app);

@@ -1,8 +1,8 @@
 'use strict';
 
 /**
- * Module dependencies
- */
+* Module dependencies
+*/
 var passport = require('passport'),
   GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
   users = require('../../controllers/users.server.controller');
@@ -13,7 +13,8 @@ module.exports = function (config) {
     clientID: config.google.clientID,
     clientSecret: config.google.clientSecret,
     callbackURL: config.google.callbackURL,
-    passReqToCallback: true
+    passReqToCallback: true,
+    scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email']
   },
   function (req, accessToken, refreshToken, profile, done) {
     // Set the provider data and include tokens

@@ -21,11 +21,7 @@ var _ = require('lodash'),
   wiredep = require('wiredep').stream,
   path = require('path'),
   endOfLine = require('os').EOL,
-  protractor = require('gulp-protractor').protractor,
-  webdriver_update = require('gulp-protractor').webdriver_update,
-  webdriver_standalone = require('gulp-protractor').webdriver_standalone,
   del = require('del'),
-  KarmaServer = require('karma').Server,
   semver = require('semver');
 
 // Local settings
@@ -109,11 +105,10 @@ gulp.task('watch:server:run-tests', function () {
 
         if (filePath === path.resolve(file.path)) {
           changedTestFiles.push(f);
+          plugins.refresh.changed(f);
         }
       });
     });
-
-    plugins.refresh.changed();
   });
 });
 
@@ -122,8 +117,8 @@ gulp.task('csslint', function () {
   return gulp.src(defaultAssets.client.css)
     .pipe(plugins.csslint('.csslintrc'))
     .pipe(plugins.csslint.formatter());
-    // Don't fail CSS issues yet
-    // .pipe(plugins.csslint.failFormatter());
+  // Don't fail CSS issues yet
+  // .pipe(plugins.csslint.failFormatter());
 });
 
 // ESLint JS linting task
@@ -153,7 +148,9 @@ gulp.task('uglify', function () {
   return gulp.src(assets)
     .pipe(plugins.ngAnnotate())
     .pipe(plugins.uglify({
-      mangle: false
+      mangle: true
+    }).on('error', function (err) {
+      console.log('Uglify error : ', err.toString());
     }))
     .pipe(plugins.concat('application.min.js'))
     .pipe(plugins.rev())
@@ -190,7 +187,9 @@ gulp.task('imagemin', function () {
   return gulp.src(defaultAssets.client.img)
     .pipe(plugins.imagemin({
       progressive: true,
-      svgoPlugins: [{ removeViewBox: false }],
+      svgoPlugins: [{
+        removeViewBox: false
+      }],
       use: [pngquant()]
     }))
     .pipe(gulp.dest('public/dist/img'));
@@ -266,7 +265,7 @@ gulp.task('makeUploadsDir', function () {
 gulp.task('templatecache', function () {
   return gulp.src(defaultAssets.client.views)
     .pipe(plugins.templateCache('templates.js', {
-      root: 'modules/',
+      root: '/modules/',
       module: 'core',
       templateHeader: '(function () {' + endOfLine + '	\'use strict\';' + endOfLine + endOfLine + '	angular' + endOfLine + '		.module(\'<%= module %>\'<%= standalone %>)' + endOfLine + '		.run(templates);' + endOfLine + endOfLine + '	templates.$inject = [\'$templateCache\'];' + endOfLine + endOfLine + '	function templates($templateCache) {' + endOfLine,
       templateBody: '		$templateCache.put(\'<%= url %>\', \'<%= contents %>\');',
@@ -278,14 +277,14 @@ gulp.task('templatecache', function () {
 // Mocha tests task
 gulp.task('mocha', function (done) {
   // Open mongoose connections
-  var mongoose = require('./config/lib/mongoose.js');
+  var mongooseService = require('./config/lib/mongoose');
   var testSuites = changedTestFiles.length ? changedTestFiles : testAssets.tests.server;
   var error;
 
   // Connect mongoose
-  mongoose.connect(function () {
-    mongoose.loadModels();
-    // Run the tests
+  mongooseService.connect(function (db) {
+    // Load mongoose models
+    mongooseService.loadModels();
     gulp.src(testSuites)
       .pipe(plugins.mocha({
         reporter: 'spec',
@@ -296,9 +295,13 @@ gulp.task('mocha', function (done) {
         error = err;
       })
       .on('end', function () {
-        // When the tests are done, disconnect mongoose and pass the error state back to gulp
-        mongoose.disconnect(function () {
-          done(error);
+        mongooseService.disconnect(function (err) {
+          if (err) {
+            console.log('Error disconnecting from database');
+            console.log(err);
+          }
+
+          return done(error);
         });
       });
   });
@@ -321,19 +324,23 @@ gulp.task('mocha:coverage', ['pre-test', 'mocha'], function () {
 
   return gulp.src(testSuites)
     .pipe(plugins.istanbul.writeReports({
-      reportOpts: { dir: './coverage/server' }
+      reportOpts: {
+        dir: './coverage/server'
+      }
     }));
 });
 
 // Karma test runner task
 gulp.task('karma', function (done) {
+  var KarmaServer = require('karma').Server;
   new KarmaServer({
     configFile: __dirname + '/karma.conf.js'
   }, done).start();
 });
 
 // Run karma with coverage options set and write report
-gulp.task('karma:coverage', function(done) {
+gulp.task('karma:coverage', function (done) {
+  var KarmaServer = require('karma').Server;
   new KarmaServer({
     configFile: __dirname + '/karma.conf.js',
     preprocessors: {
@@ -362,67 +369,78 @@ gulp.task('karma:coverage', function(done) {
 // Drops the MongoDB database, used in e2e testing
 gulp.task('dropdb', function (done) {
   // Use mongoose configuration
-  var mongoose = require('./config/lib/mongoose.js');
+  var mongooseService = require('./config/lib/mongoose');
 
-  mongoose.connect(function (db) {
-    db.connection.db.dropDatabase(function (err) {
+  mongooseService.connect(function (db) {
+    db.dropDatabase(function (err) {
       if (err) {
         console.error(err);
       } else {
-        console.log('Successfully dropped db: ', db.connection.db.databaseName);
+        console.log('Successfully dropped db: ', db.databaseName);
       }
-      db.connection.db.close(done);
+
+      mongooseService.disconnect(done);
     });
   });
 });
 
+// Seed Mongo database based on configuration
+gulp.task('mongo-seed', function (done) {
+  var db = require('./config/lib/mongoose');
+  var seed = require('./config/lib/mongo-seed');
+
+  // Open mongoose database connection
+  db.connect(function () {
+    db.loadModels();
+
+    seed
+      .start({
+        options: {
+          logResults: true
+        }
+      })
+      .then(function () {
+        // Disconnect and finish task
+        db.disconnect(done);
+      })
+      .catch(function (err) {
+        db.disconnect(function (disconnectError) {
+          if (disconnectError) {
+            console.log('Error disconnecting from the database, but was preceded by a Mongo Seed error.');
+          }
+
+          // Finish task with error
+          done(err);
+        });
+      });
+  });
+
+});
+
 // Downloads the selenium webdriver if protractor version is compatible
-gulp.task('webdriver_update', webdriver_update);
-
-gulp.task('webdriver_prep', function(done) {
-  runSequence('protractor_prep', 'webdriver_update', done);
+gulp.task('webdriver_update', function (done) {
+  return require('gulp-protractor').webdriver_update(done);
 });
-
-gulp.task('protractor_prep', function() {
-  var nodeVersions = process.versions;
-  switch (nodeVersions.node.substr(0, 1)) {
-    case '4':
-    case '5':
-      console.log('E2E testing doesnt support v4 and v5');
-      process.exit(0);
-      break;
-    case '6':
-      if (parseInt(nodeVersions.node.substr(1, 1), 10) < 9) {
-        console.log('E2E testing with latest protractor requires v >= 6.9 ');
-        process.exit(0);
-      }
-      break;
-    default:
-      console.log('Detecting support for protractor E2E tests');
-      break;
-  }
-
-  return gulp.src('*.js');
-});
-
-
 // Start the standalone selenium server
 // NOTE: This is not needed if you reference the
 // seleniumServerJar in your protractor.conf.js
-gulp.task('webdriver_standalone', webdriver_standalone);
+gulp.task('webdriver_standalone', function (done) {
+  return require('gulp-protractor').webdriver_standalone(done);
+});
 
 // Protractor test runner task
-gulp.task('protractor', ['webdriver_prep'], function () {
+gulp.task('protractor', ['webdriver_update'], function () {
+  var protractor = require('gulp-protractor').protractor;
   gulp.src([])
     .pipe(protractor({
       configFile: 'protractor.conf.js'
     }))
-    .on('end', function() {
+    .on('end', function () {
       console.log('E2E Testing complete');
       // exit with success.
       process.exit(0);
     })
-    .on('error', function(err) {
+    .on('error', function (err) {
       console.error('E2E Tests failed:');
       console.error(err);
       process.exit(1);
@@ -478,4 +496,18 @@ gulp.task('prod', function (done) {
 
 gulp.task('WeaosProd', function (done) {
   runSequence(['copyLocalEnvConfig', 'makeUploadsDir', 'templatecache'], 'build', 'env:prod', done);
+});
+
+// Run Mongo Seed with default environment config
+gulp.task('seed', function (done) {
+  runSequence('env:dev', 'mongo-seed', done);
+});
+
+// Run Mongo Seed with production environment config
+gulp.task('seed:prod', function (done) {
+  runSequence('env:prod', 'mongo-seed', done);
+});
+
+gulp.task('seed:test', function (done) {
+  runSequence('env:test', 'mongo-seed', done);
 });

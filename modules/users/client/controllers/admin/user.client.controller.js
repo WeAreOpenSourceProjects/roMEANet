@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -28,7 +28,7 @@
 
           vm.users.splice(vm.users.indexOf(user), 1);
         } else {
-          vm.user.$remove(function() {
+          vm.user.$remove(function () {
             $state.go('admin.users');
           });
         }
@@ -44,11 +44,11 @@
 
       var user = vm.user;
 
-      user.$update(function() {
+      user.$update(function () {
         $state.go('admin.user', {
           userId: user._id
         });
-      }, function(errorResponse) {
+      }, function (errorResponse) {
         vm.error = errorResponse.data.message;
       });
     }
@@ -62,7 +62,7 @@
     }
 
     /* VIEW INIT */
-    $element.find('input').on('keydown', function(ev) {
+    $element.find('input').on('keydown', function (ev) {
       ev.stopPropagation();
     });
 

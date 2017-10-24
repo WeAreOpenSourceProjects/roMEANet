@@ -1,4 +1,4 @@
-(function(app) {
+(function (app) {
   'use strict';
 
   // Start by defining the main module and adding the module dependencies
@@ -10,11 +10,11 @@
   angular
     .module(app.applicationModuleName)
     .config(bootstrapConfig)
-    .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    .config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
       cfpLoadingBarProvider.includeSpinner = false;
       cfpLoadingBarProvider.loadingBarTemplate = '<div id="loading-bar"><div class="loading-bar bar"><div class="peg"></div></div></div>';
     }])
-    .config(function($mdThemingProvider) {
+    .config(function ($mdThemingProvider) {
 
       $mdThemingProvider.definePalette('roMEANetPalette', {
         '50': '333333',

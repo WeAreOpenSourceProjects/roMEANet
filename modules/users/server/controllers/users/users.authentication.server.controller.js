@@ -19,7 +19,7 @@ var noReturnUrls = [
 /**
  * Signup
  */
-exports.signup = function(req, res) {
+exports.signup = function (req, res) {
   // For security measurement we remove the roles from the req.body object
   delete req.body.roles;
 
@@ -29,7 +29,7 @@ exports.signup = function(req, res) {
   user.displayName = user.firstName + ' ' + user.lastName;
 
   // Then save the user
-  user.save(function(err) {
+  user.save(function (err) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
@@ -51,8 +51,8 @@ exports.signup = function(req, res) {
 /**
  * Signin after passport authentication
  */
-exports.signin = function(req, res, next) {
-  passport.authenticate('local', function(err, user, info) {
+exports.signin = function (req, res, next) {
+  passport.authenticate('local', function (err, user, info) {
     if (err || !user) {
       res.status(422).send(info);
     } else {
@@ -72,7 +72,7 @@ exports.signin = function(req, res, next) {
 /**
  * Signout
  */
-exports.signout = function(req, res) {
+exports.signout = function (req, res) {
   req.logout();
   res.redirect('/');
 };
@@ -80,36 +80,35 @@ exports.signout = function(req, res) {
 /**
  * OAuth provider call
  */
-exports.oauthCall = function(strategy, scope) {
-  return function(req, res, next) {
-    if (req.query && req.query.redirect_to) req.session.redirect_to = req.query.redirect_to;
-
-    // Authenticate
-    passport.authenticate(strategy, scope)(req, res, next);
-  };
+exports.oauthCall = function (req, res, next) {
+  var strategy = req.params.strategy;
+  // Authenticate
+  passport.authenticate(strategy)(req, res, next);
 };
 
 /**
  * OAuth callback
  */
-exports.oauthCallback = function(strategy) {
-  return function(req, res, next) {
+exports.oauthCallback = function (req, res, next) {
+  var strategy = req.params.strategy;
 
-    // info.redirect_to contains inteded redirect path
-    passport.authenticate(strategy, function(err, user, info) {
+  // info.redirect_to contains inteded redirect path
+  passport.authenticate(strategy, function (err, user, info) {
+    if (err) {
+      return res.redirect('/authentication/signin?err=' + encodeURIComponent(errorHandler.getErrorMessage(err)));
+    }
+    if (!user) {
+      return res.redirect('/authentication/signin');
+    }
+    req.login(user, function (err) {
       if (err) {
-        return res.redirect('/authentication/signin?err=' + encodeURIComponent(errorHandler.getErrorMessage(err)));
-      }
-      if (!user) {
         return res.redirect('/authentication/signin');
       }
 
-      var token = authorization.signToken(user);
-      return res.redirect((info.redirect_to || '/') + '?token=' + token);
-    })(req, res, next);
-  };
+      return res.redirect(info.redirect_to || '/');
+    });
+  })(req, res, next);
 };
-
 /**
  * Helper function to save or update a OAuth user profile
  */
@@ -210,7 +209,7 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
 /**
  * Remove OAuth provider
  */
-exports.removeOAuthProvider = function(req, res, next) {
+exports.removeOAuthProvider = function (req, res, next) {
   var user = req.user;
   var provider = req.query.provider;
 
@@ -230,7 +229,7 @@ exports.removeOAuthProvider = function(req, res, next) {
     user.markModified('additionalProvidersData');
   }
 
-  user.save(function(err) {
+  user.save(function (err) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)

@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular.module('core')
@@ -37,7 +37,7 @@
             separeteBy = ' - ';
         }
 
-        _.forEach(toState.name.split('.'), function(value, index) {
+        _.forEach(toState.name.split('.'), function (value, index) {
           if (attribute.kind === 'header') {
             stateTitle = stateTitle + '<span class="topTitlePart' + index + '">' + _.capitalize(value) + '</span>' + separeteBy;
           } else {

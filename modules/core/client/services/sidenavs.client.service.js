@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -119,7 +119,7 @@
 
     function init() {
       // A private function for rendering decision
-      shouldRenderItem = function(user) {
+      shouldRenderItem = function (user) {
         if (user && _.indexOf(this.roles, 'moderator') !== -1 && _.indexOf(user.roles, 'moderator') !== -1) {
           return true;
         }
@@ -145,7 +145,7 @@
         return false;
       };
 
-      shouldRender = function(user) {
+      shouldRender = function (user) {
         if (this.roles.indexOf('*') !== -1) {
           return true;
         } else {

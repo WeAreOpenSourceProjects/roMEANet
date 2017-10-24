@@ -1,8 +1,8 @@
-(function() {
+(function () {
   'use strict';
 
 
-// TODO this should be Users service
+  // TODO this should be Users service
   angular
     .module('users.admin.services')
     .factory('AdminService', AdminService);

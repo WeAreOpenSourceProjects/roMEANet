@@ -1,6 +1,6 @@
-sudo: required
-dist: trusty
 language: node_js
+dist: trusty
+sudo: required
 node_js:
   - '6.10'
   - '7'
@@ -34,6 +34,7 @@ addons:
 before_install:
   - openssl aes-256-cbc -K $encrypted_6729f53900bc_key -iv $encrypted_6729f53900bc_iv
     -in deploy_key.enc -out deploy_key -d
+  - npm install webdriver-manager -g && webdriver-manager update
   - npm install nsp -g
 #  - npm install snyk -g
   - 'export PATH=$PATH:/usr/lib/chromium-browser/'
@@ -51,7 +52,8 @@ after_script:
   - nsp check
 #  - snyk test
   - gulp test:coverage
-  - node_modules/.bin/lcov-result-merger 'coverage/**/lcov.info' | node_modules/coveralls/bin/coveralls.js
+  - npm install lcov-result-merger@~1.2.0 -g
+  - lcov-result-merger 'coverage/**/lcov.info' | node_modules/coveralls/bin/coveralls.js
 deploy:
 - provider: script
   skip_cleanup: true
@@ -63,7 +65,7 @@ deploy:
 - provider: script
   skip_cleanup: true
   script: ssh -p $SSH_PORT $USER@$SERVER -o StrictHostKeyChecking=no "cd $DEPLOY_PATH
-    && gulp WeaosProd && pm2 restart all"
+    && gulp WeaosProd && pm2 restart romeanet"
   on:
     branch: master
     node: '7.x'
