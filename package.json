@@ -1,6 +1,6 @@
 {
   "name": "romeanet",
-  "version": "0.2.0",
+  "version": "0.6.0",
   "description": "Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js.",
   "base": "meanjs",
   "meanjs-version": "0.6.0",

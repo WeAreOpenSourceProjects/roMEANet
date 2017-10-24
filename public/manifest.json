@@ -1,7 +1,7 @@
 {
   "name": "romeanet",
   "short_name": "romeanet",
-  "version": "0.2.0",
+  "version": "0.6.0",
   "base": "meanjs",
   "meanjs-version": "0.6.0",
   "start_url": ".",
