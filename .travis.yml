@@ -65,7 +65,7 @@ deploy:
 - provider: script
   skip_cleanup: true
   script: ssh -p $SSH_PORT $USER@$SERVER -o StrictHostKeyChecking=no "cd $DEPLOY_PATH
-    && gulp WeaosProd && pm2 restart romeanet"
+    && pm2 stop romeanet && pm2 delete romeanet && gulp WeaosProd && NODE_ENV=production pm2 start server.js --name romeanet"
   on:
     branch: master
     node: '7.x'
