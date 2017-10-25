@@ -7,7 +7,32 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/weareopensource/romeanet/badge.svg)](https://snyk.io/test/github/weareopensource/romeanet)
 
 
-# MEAN.JS
+roMEANet is a full-stack Javascript open-source solution based on MEAN.js. It's just Mean.Js with an Other Design, Material, and JWT. We try to follow MeanJS on every update.
+
+## We call this a Starter Pack.
+
+The goal is to have a stack ready to start projects quickly, and to sell prototypes. An example of the Stack deployed is the [here](http://romeanet.weareopensource.me).
+
+### State:
+
+- A responsive design
+- Simple design to the taste of the day to sell your prototypes
+- Jwt for quick use of the API ( mobiles apps ... )
+- All based on MEAN.JS, a simple and solid base, any modification is studied
+
+### Roadmap:
+
+- Quick pack to expose a Swagger (sometimes necessary to sell a prorotype of API)
+- A New Stack (Angular X, [client](https://github.com/weareopensource/waosAngular) [server](https://github.com/weareopensource/waosNode) separation)
+
+## Installation
+
+Just follow MeanJs Readme :)
+
+
+
+___
+
 
 [![MEAN.JS Logo](http://meanjs.org/img/logo-small.png)](http://meanjs.org/)
 
