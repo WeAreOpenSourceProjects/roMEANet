@@ -38,10 +38,6 @@ before_install:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
 - sleep 3
-before_deploy:
-- eval "$(ssh-agent -s)"
-- chmod 600 $TRAVIS_BUILD_DIR/deploy_key
-- ssh-add $TRAVIS_BUILD_DIR/deploy_key
 after_script:
 - nsp check
 - gulp test:coverage
@@ -53,4 +49,4 @@ deploy:
   on:
     branch: dev
     node: 7.x
-    os: linux
+    condition: $TRAVIS_OS_NAME = linux
