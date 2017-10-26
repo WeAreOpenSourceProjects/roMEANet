@@ -98,15 +98,16 @@
     "passport-local": "~1.0.0",
     "passport-paypal-openidconnect": "~0.1.1",
     "passport-twitter": "~1.0.4",
-    "run-sequence": "~2.1.0",
     "read-multiple-files": "^1.1.1",
+    "run-sequence": "~2.1.0",
     "serve-favicon": "^2.4.5",
+    "snyk": "^1.30.1",
     "socket.io": "~2.0.2",
     "standard-error": "^1.1.0",
+    "travis-encrypt": "^2.1.1",
     "validator": "~8.0.0",
     "winston": "~2.3.1",
-    "wiredep": "~4.0.0",
-    "snyk": "^1.30.1"
+    "wiredep": "~4.0.0"
   },
   "devDependencies": {
     "coveralls": "~2.13.0",
