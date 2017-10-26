@@ -46,7 +46,7 @@ after_script:
 deploy:
   provider: script
   script: scripts/deploy-travis.sh
-  on:
-    branch: dev
-    node: 7.x
-    condition: $TRAVIS_OS_NAME = linux
+#  on:
+#    branch: dev
+#    node: '7.x'
+#    condition: $TRAVIS_OS_NAME = linux
