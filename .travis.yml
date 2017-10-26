@@ -50,6 +50,13 @@ after_script:
 deploy:
 - provider: script
   skip_cleanup: true
+  script: rsync -r -e "ssh -p $SSH_PORT -o StrictHostKeyChecking=no" --exclude='logs/app.log' --delete-after --quiet $TRAVIS_BUILD_DIR/ $USER@$SERVER:$DEPLOY_PATH
+  on:
+    branch: master
+    node: '7.x'
+    os: linux
+- provider: script
+  skip_cleanup: true
   script: ssh -p $SSH_PORT $USER@$SERVER -o StrictHostKeyChecking=no "cd $DEPLOY_PATH
     && pm2 stop romeanet && pm2 delete romeanet && gulp WeaosProd && NODE_ENV=production
     pm2 start server.js --name romeanet"
