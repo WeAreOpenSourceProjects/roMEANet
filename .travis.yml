@@ -2,18 +2,18 @@ language: node_js
 dist: trusty
 sudo: required
 node_js:
-- '6.10'
+# - '6.10'
 - '7'
-- '8'
+# - '8'
 matrix:
   fast_finish: true
   allow_failures:
   - node_js: '8'
 os:
-- linux
-- centos
-- macosx
-- windows
+# - linux
+# - centos
+# - macosx
+# - windows
 env:
 - NODE_ENV=travis CXX="g++-4.8" CC="gcc-4.8"
 services:
@@ -48,9 +48,8 @@ after_script:
 - npm install lcov-result-merger@~1.2.0 -g
 - lcov-result-merger 'coverage/**/lcov.info' | node_modules/coveralls/bin/coveralls.js
 deploy:
-- provider: script
-  skip_cleanup: true
-  script: ssh -p $SSH_PORT $USER@$SERVER -o StrictHostKeyChecking=no "./deploy.sh"
+  provider: script
+  script: scripts/deploy-travis.sh
   on:
     branch: dev
     node: 7.x
