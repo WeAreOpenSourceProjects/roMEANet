@@ -1,5 +1,11 @@
 #!/bin/bash
 
+ssh-keyscan -t $TRAVIS_SSH_KEY_TYPES -H weareopensource.me 2>&1 | tee -a $HOME/.ssh/known_hosts
+
+eval "$(ssh-agent -s)" # Start ssh-agent cache
+chmod 600 .travis/deploy_key # Allow read access to the private key
+ssh-add .travis/deploy_key # Add the private key to SSH
+
 git config --global push.default matching
 git remote add deploy ssh://git@$SSH_SERVER:$SSH_PORT$DEPLOY_PATH
 git push deploy dev

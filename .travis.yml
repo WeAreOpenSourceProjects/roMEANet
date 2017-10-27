@@ -19,7 +19,7 @@ env:
 services:
   - mongodb
 addons:
-  ssh_known_hosts: weareopensource.me
+  # ssh_known_hosts: weareopensource.me
   # https://github.com/travis-ci/travis-ci/issues/7043
   apt:
     sources:
@@ -43,10 +43,6 @@ after_script:
   - gulp test:coverage
   - npm install lcov-result-merger@~1.2.0 -g
   - lcov-result-merger 'coverage/**/lcov.info' | node_modules/coveralls/bin/coveralls.js
-before_deploy:
-  - eval "$(ssh-agent -s)"
-  - chmod 600 $TRAVIS_BUILD_DIR/.travis/deploy_key
-  - ssh-add $TRAVIS_BUILD_DIR/.travis/deploy_key
 deploy:
   skip_cleanup: true
   provider: script
