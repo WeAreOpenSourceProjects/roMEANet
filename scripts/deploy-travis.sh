@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ssh-keyscan -t $TRAVIS_SSH_KEY_TYPES -H weareopensource.me 2>&1 | tee -a $HOME/.ssh/known_hosts
+ssh-keyscan -t $TRAVIS_SSH_KEY_TYPES -H "weareopensource.me" 2>&1 | tee -a $HOME/.ssh/known_hosts
 
 eval "$(ssh-agent -s)" # Start ssh-agent cache
 chmod 600 .travis/deploy_key # Allow read access to the private key
