@@ -52,5 +52,5 @@ deploy:
   script: scripts/deploy-travis.sh
   on:
     all_branches: true
-    node: '7.x'
+    node: '7'
 #    condition: $TRAVIS_OS_NAME = linux
