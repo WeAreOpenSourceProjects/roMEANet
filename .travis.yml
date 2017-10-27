@@ -19,7 +19,7 @@ env:
 services:
 - mongodb
 addons:
-  ssh_known_hosts: "$SSH_SERVER"
+  # ssh_known_hosts: "$SSH_SERVER" Tavis #7043 https://github.com/travis-ci/travis-ci/issues/7043
   apt:
     sources:
     - ubuntu-toolchain-r-test
@@ -43,6 +43,8 @@ after_script:
 - gulp test:coverage
 - npm install lcov-result-merger@~1.2.0 -g
 - lcov-result-merger 'coverage/**/lcov.info' | node_modules/coveralls/bin/coveralls.js
+before_deploy: # or anywhere before the secret ssh host is needed
+  - ssh-keyscan -t $TRAVIS_SSH_KEY_TYPES -H $SSH_SERVER 2>&1 | tee -a $HOME/.ssh/known_hosts
 deploy:
   skip_cleanup: true
   provider: script
