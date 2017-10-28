@@ -9,7 +9,7 @@ ssh-add .travis/deploy_key # Add the private key to SSH
 # git push deploy dev
 
 # Skip this command if you don't need to execute any additional commands after deploying.
-ssh -p $SSH_PORT $SSH_USER@$SSH_SERVER -o StrictHostKeyChecking=no <<EOF
+ssh -p $SSH_PORT $SSH_USER@$SSH_SERVER -o StrictHostKeyChecking=no "$( cat <<'EOT'
   zsh
   cd $DEPLOY_PATH
   pm2 stop $PROJECT
@@ -18,4 +18,5 @@ ssh -p $SSH_PORT $SSH_USER@$SSH_SERVER -o StrictHostKeyChecking=no <<EOF
   npm install
   gulp WeaosProd
   NODE_ENV=production pm2 start server.js --name $PROJECT
-EOF
+EOT
+)"
