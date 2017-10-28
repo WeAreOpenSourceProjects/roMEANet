@@ -19,7 +19,7 @@ env:
 services:
 - mongodb
 addons:
-  ssh_known_hosts: 94.23.203.205
+  ssh_known_hosts: "$SSH_SERVER"
   apt:
     sources:
     - ubuntu-toolchain-r-test
