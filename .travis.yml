@@ -1,52 +1,52 @@
-language: node_js
-dist: trusty
-sudo: required
+language:          node_js
+dist:              trusty
+sudo:              required
 node_js:
-  - '7'
-  # - '6.10'
-  # - '8'
+- '7'
+# - '6.10'
+# - '8'
 matrix:
-  fast_finish: true
+  fast_finish:     true
   allow_failures:
-    - node_js: '8'
+  - node_js:     '8'
 os:
-  - linux
-  # - centos
-  # - macosx
-  # - windows
+- linux
+# - centos
+# - macosx
+# - windows
 env:
-  - NODE_ENV=travis CXX="g++-4.8" CC="gcc-4.8"
+- NODE_ENV=travis CXX="g++-4.8" CC="gcc-4.8"
 services:
-  - mongodb
+- mongodb
 addons:
-  ssh_known_hosts: weareopensource.me
+  ssh_known_hosts: 94.23.203.205
   apt:
     sources:
-      - ubuntu-toolchain-r-test
-      - google-chrome
+    - ubuntu-toolchain-r-test
+    - google-chrome
     packages:
-      - g++-4.8
-      - gcc-4.8
-      - clang
-      - google-chrome-stable
+    - g++-4.8
+    - gcc-4.8
+    - clang
+    - google-chrome-stable
 before_install:
-  - openssl aes-256-cbc -K $encrypted_6729f53900bc_key -iv $encrypted_6729f53900bc_iv -in ./.travis/deploy_key.enc -out ./.travis/deploy_key -d
-  - npm install webdriver-manager -g && webdriver-manager update
-  - npm install nsp -g
-  - export PATH=$PATH:/usr/lib/chromium-browser/
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-  - sleep 3
+- openssl aes-256-cbc -K $encrypted_6729f53900bc_key -iv $encrypted_6729f53900bc_iv -in ./.travis/deploy_key.enc -out ./.travis/deploy_key -d
+- npm install webdriver-manager -g && webdriver-manager update
+- npm install nsp -g
+- export PATH=$PATH:/usr/lib/chromium-browser/
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- sleep 3
 after_script:
-  - nsp check
-  - gulp test:coverage
-  - npm install lcov-result-merger@~1.2.0 -g
-  - lcov-result-merger 'coverage/**/lcov.info' | node_modules/coveralls/bin/coveralls.js
+- nsp check
+- gulp test:coverage
+- npm install lcov-result-merger@~1.2.0 -g
+- lcov-result-merger 'coverage/**/lcov.info' | node_modules/coveralls/bin/coveralls.js
 deploy:
-  skip_cleanup: true
-  provider: script
-  script: scripts/deploy-travis.sh
+  skip_cleanup:    true
+  provider:        script
+  script:          scripts/deploy-travis.sh
   on:
-    all_branches: true
-    node: '7'
-#    condition: $TRAVIS_OS_NAME = linux
+    all_branches:  true
+    node:          '7'
+#    condition:    $TRAVIS_OS_NAME = linux
