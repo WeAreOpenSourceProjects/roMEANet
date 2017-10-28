@@ -19,8 +19,7 @@ env:
 services:
   - mongodb
 addons:
-  # ssh_known_hosts: weareopensource.me
-  # https://github.com/travis-ci/travis-ci/issues/7043
+  ssh_known_hosts: weareopensource.me
   apt:
     sources:
       - ubuntu-toolchain-r-test
