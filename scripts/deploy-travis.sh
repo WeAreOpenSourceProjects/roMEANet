@@ -5,7 +5,7 @@ chmod 600 .travis/deploy_key # Allow read access to the private key
 ssh-add .travis/deploy_key # Add the private key to SSH
 
 git config --global push.default matching
-GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no" git remote add deploy ssh://git@$SSH_SERVER:$SSH_PORT$DEPLOY_PATH
+GIT_SSH_COMMAND="ssh -p $SSH_PORT -o StrictHostKeyChecking=no" git remote add deploy ssh://git@$SSH_SERVER:$SSH_PORT$DEPLOY_PATH
 git push deploy dev
 
 # Skip this command if you don't need to execute any additional commands after deploying.
