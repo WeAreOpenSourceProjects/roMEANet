@@ -15,9 +15,5 @@ ssh -p $SSH_PORT $SSH_USER@$SSH_SERVER -o StrictHostKeyChecking=no "$( cat <<EOT
   gulp WeaosProd
   NODE_ENV=production pm2 start server.js --name '${PROJECT}'
   echo "$(date -u) End Deploy '${PROJECT}'"  >> ../deploy.log
-  exit
 EOT
 )"
-
-ssh-agent -k
-echo "success"
