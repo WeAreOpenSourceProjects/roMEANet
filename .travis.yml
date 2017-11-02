@@ -13,7 +13,7 @@ os:
 - linux
 # - centos
 # - macosx
-# - windows
+# - windowss
 env:
 - NODE_ENV=travis CXX="g++-4.8" CC="gcc-4.8"
 services:
@@ -43,10 +43,6 @@ after_script:
 - gulp test:coverage
 - npm install lcov-result-merger@~1.2.0 -g
 - lcov-result-merger 'coverage/**/lcov.info' | node_modules/coveralls/bin/coveralls.js
-before_deploy:
-- eval "$(ssh-agent -s)"
-- chmod 600 $TRAVIS_BUILD_DIR/.travis/deploy_key
-- ssh-add $TRAVIS_BUILD_DIR/.travis/deploy_key
 deploy:
   skip_cleanup:    true
   provider:        script
