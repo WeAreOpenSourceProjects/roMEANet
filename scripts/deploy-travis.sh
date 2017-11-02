@@ -13,6 +13,7 @@ ssh -p $SSH_PORT $SSH_USER@$SSH_SERVER -o StrictHostKeyChecking=no "$( cat <<EOT
   npm install
   gulp WeaosProd
   NODE_ENV=production pm2 start server.js --name '${PROJECT}'
-  echo "End Deploy '${PROJECT}'"  >> ../deploy.log
+  echo "$(date -u) End Deploy '${PROJECT}'"  >> ../deploy.log
+  exit
 EOT
 )"
