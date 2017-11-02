@@ -46,7 +46,7 @@ after_script:
 deploy:
   skip_cleanup:    true
   provider:        script
-  script:          nohup scripts/deploy-travis.sh > /dev/null 2>&1 &
+  script:          scripts/deploy-travis.sh
   on:
     all_branches:  true
     node:          '7'

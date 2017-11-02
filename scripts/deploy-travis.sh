@@ -18,3 +18,6 @@ ssh -p $SSH_PORT $SSH_USER@$SSH_SERVER -o StrictHostKeyChecking=no "$( cat <<EOT
   exit
 EOT
 )"
+
+ssh-agent -k
+echo "success"
