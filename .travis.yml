@@ -39,10 +39,10 @@ before_install:
 - sh -e /etc/init.d/xvfb start
 - sleep 3
 after_script:
-# - nsp check
-# - gulp test:coverage
-# - npm install lcov-result-merger@~1.2.0 -g
-# - lcov-result-merger 'coverage/**/lcov.info' | node_modules/coveralls/bin/coveralls.js
+- nsp check
+- gulp test:coverage
+- npm install lcov-result-merger@~1.2.0 -g
+- lcov-result-merger 'coverage/**/lcov.info' | node_modules/coveralls/bin/coveralls.js
 before_deploy:
 - eval "$(ssh-agent -s)"
 - chmod 600 $TRAVIS_BUILD_DIR/.travis/deploy_key
