@@ -3,17 +3,17 @@ dist:              trusty
 sudo:              required
 node_js:
 - '7'
-# - '6.10'
-# - '8'
+- '6.10'
+- '8'
 matrix:
   fast_finish:     true
   allow_failures:
   - node_js:     '8'
 os:
 - linux
-# - centos
-# - macosx
-# - windowss
+- centos
+- macosx
+- windowss
 env:
 - NODE_ENV=travis CXX="g++-4.8" CC="gcc-4.8"
 services:
@@ -48,6 +48,6 @@ deploy:
   provider:        script
   script:          scripts/deploy-travis.sh
   on:
-    all_branches:  true
-    node:          '7'
-#    condition:    $TRAVIS_OS_NAME = linux
+    branch: master
+    node: 7
+    os: linux
