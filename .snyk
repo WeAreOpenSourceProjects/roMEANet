@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.7.1
+version: v1.8.0
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
@@ -16,3 +16,25 @@ patch:
         patched: '2017-05-26T06:10:09.612Z'
     - socket.io > socket.io-adapter > socket.io-parser > debug > ms:
         patched: '2017-05-26T06:10:09.612Z'
+    - gulp-refresh > mini-lr > body-parser > debug > ms:
+        patched: '2017-10-27T06:10:20.332Z'
+  'npm:debug:20170905':
+    - gulp-refresh > mini-lr > body-parser > debug:
+        patched: '2017-10-27T06:10:20.332Z'
+  'npm:minimatch:20160620':
+    - gulp > vinyl-fs > glob-stream > minimatch:
+        patched: '2017-10-27T06:10:20.332Z'
+    - gulp-nodemon > gulp > vinyl-fs > glob-stream > minimatch:
+        patched: '2017-10-27T06:10:20.332Z'
+    - gulp > vinyl-fs > glob-stream > glob > minimatch:
+        patched: '2017-10-27T06:10:20.332Z'
+    - gulp-nodemon > gulp > vinyl-fs > glob-stream > glob > minimatch:
+        patched: '2017-10-27T06:10:20.332Z'
+    - gulp > vinyl-fs > glob-watcher > gaze > globule > minimatch:
+        patched: '2017-10-27T06:10:20.332Z'
+    - gulp-nodemon > gulp > vinyl-fs > glob-watcher > gaze > globule > minimatch:
+        patched: '2017-10-27T06:10:20.332Z'
+    - gulp > vinyl-fs > glob-watcher > gaze > globule > glob > minimatch:
+        patched: '2017-10-27T06:10:20.332Z'
+    - gulp-nodemon > gulp > vinyl-fs > glob-watcher > gaze > globule > glob > minimatch:
+        patched: '2017-10-27T06:10:20.332Z'
