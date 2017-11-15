@@ -16,11 +16,6 @@
   z-index: 46;
 }
 
-.header nav.top .nav-wrapper {
-  padding-left: 60px;
-}
-
-
 .header nav.top .top-menu-toggle,
 .header nav.top #top-menu-toggle {
   display: none;
