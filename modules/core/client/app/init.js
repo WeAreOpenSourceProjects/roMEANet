@@ -61,6 +61,52 @@
         .accentPalette('roMEANetPalette')
         .backgroundPalette('roMEANetBackgroundPalette');
 
+        // $mdThemingProvider.definePalette('roMEANetPalette', {
+        //   '50': 'f0f0f0',
+        //   '100': 'd0d0d0',
+        //   '200': 'c0c0c0',
+        //   '300': 'b0b0b0',
+        //   '400': 'a0a0a0',
+        //   '500': '909090',
+        //   '600': '808080',
+        //   '700': '707070',
+        //   '800': '606060',
+        //   '900': '505050',
+        //   'A100': '0f0f0f',
+        //   'A200': '707070',
+        //   'A400': '222222',
+        //   'A700': 'b0b0b0',
+        //   'contrastDefaultColor': 'light', // whether, by default, text (contrast) on this palette should be dark or light
+        //   'contrastDarkColors': ['50', '100', '200', '300', '400', 'A100'], // hues which contrast should be 'dark' by default
+        //   'contrastLightColors': undefined // could also specify this if default was 'dark'
+        // });
+        //
+        // $mdThemingProvider.definePalette('roMEANetBackgroundPalette', {
+        //   '50': '333333',
+        //   '100': '2f2f2f',
+        //   '200': '2a2a2a',
+        //   '300': '222222',
+        //   '400': '1f1f1f',
+        //   '500': '1a1a1a',
+        //   '600': '111111',
+        //   '700': '0f0f0f',
+        //   '800': '0a0a0a',
+        //   '900': '000000',
+        //   'A100': '0f0f0f',
+        //   'A200': '707070',
+        //   'A400': '222222',
+        //   'A700': 'b0b0b0',
+        //   'SIDENAVLIGHT': '1f1f1f',
+        //   'SIDENAVDARK': '1a1a1a',
+        //   'TOPNAV': '1a1a1a'
+        // });
+        //
+        // $mdThemingProvider.theme('default')
+        //   .dark()
+        //   .primaryPalette('roMEANetPalette')
+        //   .accentPalette('roMEANetPalette')
+        //   .backgroundPalette('roMEANetBackgroundPalette');
+
     });
 
   function bootstrapConfig($compileProvider, $locationProvider, $httpProvider, $logProvider) {
