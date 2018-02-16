@@ -79,7 +79,7 @@
     "helmet": "~3.8.1",
     "imagemin-pngquant": "~5.0.0",
     "jasmine-core": "~2.7.0",
-    "jsonwebtoken": "~7.4.1",
+    "jsonwebtoken": "~8.0.0",
     "lodash": "~4.17.4",
     "lusca": "~1.5.1",
     "memory-cache": "~0.1.5",
