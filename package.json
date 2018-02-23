@@ -78,7 +78,7 @@
     "gulp-uglify": "~3.0.0",
     "helmet": "~3.8.1",
     "imagemin-pngquant": "~5.0.0",
-    "jasmine-core": "~2.7.0",
+    "jasmine-core": "~3.0.0",
     "jsonwebtoken": "~7.4.1",
     "lodash": "~4.17.4",
     "lusca": "~1.5.1",
@@ -107,7 +107,7 @@
     "socket.io": "~2.0.2",
     "standard-error": "^1.1.0",
     "travis-encrypt": "^2.1.1",
-    "validator": "~8.0.0",
+    "validator": "~9.4.1",
     "winston": "~2.3.1",
     "wiredep": "~4.0.0"
   },
