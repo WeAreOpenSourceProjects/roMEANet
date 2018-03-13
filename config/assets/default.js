@@ -4,15 +4,15 @@ module.exports = {
   client: {
     lib: {
       css: [
-        // bower:css
+        // yarn:css
         'public/lib/angular-material/angular-material.css',
         'public/lib/font-awesome/css/font-awesome.css',
         'public/lib/angular-tooltips/dist/angular-tooltips.css',
         'public/lib/angular-loading-bar/build/loading-bar.css'
-        // endbower
+        // endyarn
       ],
       js: [
-        // bower:js
+        // yarn:js
         'public/lib/jquery/dist/jquery.min.js',
         'public/lib/angular/angular.js',
         'public/lib/angular-animate/angular-animate.js',
@@ -30,7 +30,7 @@ module.exports = {
         'public/lib/angular-material/angular-material.js',
         'public/lib/angularUtils-pagination/dirPagination.js',
         'public/lib/angular-sanitize/angular-sanitize.js'
-        // endbower
+        // endyarn
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

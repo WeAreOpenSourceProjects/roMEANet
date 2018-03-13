@@ -13,31 +13,24 @@
   },
   "engines": {
     "node": ">=6.10.0",
-    "npm": ">=3.10.8"
+    "npm": ">=3.10.8",
+    "yarn": ">= 1.0.0"
   },
   "scripts": {
-    "update": "npm update && npm prune && npm run bower",
-    "clean": "rm -rf node_modules/ public/lib/",
-    "reinstall": "npm cache clean && npm run clean && npm install",
     "start": "gulp",
     "start:prod": "gulp prod",
     "start:debug": "node-debug --web-host 0.0.0.0 server.js & gulp debug",
-    "gulp": "gulp",
-    "bower": "bower install --allow-root && bower prune --allow-root",
-    "lint": "gulp lint",
     "test": "gulp test",
     "test:server": "gulp test:server",
     "test:server:watch": "gulp test:server:watch",
     "test:client": "gulp test:client",
     "test:e2e": "gulp test:e2e",
     "test:coverage": "gulp test:coverage",
-    "postinstall": "npm run bower",
     "generate-ssl-certs": "scripts/generate-ssl-certs.sh",
     "seed": "gulp seed",
     "seed:prod": "gulp seed:prod",
     "seed:test": "gulp seed:test",
-    "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
+    "postinstall": "node -e \"try { require('fs').symlinkSync(require('path').resolve('node_modules/@public'), 'public/lib', 'junction') } catch (e) { }\""
   },
   "dependencies": {
     "acl": "~0.4.11",
@@ -109,7 +102,24 @@
     "travis-encrypt": "^2.1.1",
     "validator": "~8.0.0",
     "winston": "~2.3.1",
-    "wiredep": "~4.0.0"
+    "wiredep": "~4.0.0",
+    "@public/angular": "angular/bower-angular#~1.5.0",
+    "@public/angular-animate": "angular/bower-angular-animate#~1.5.0",
+    "@public/angular-aria": "angular/bower-angular-aria#~1.5.0",
+    "@public/angular-loading-bar": "chieffancypants/angular-loading-bar#^0.9.0",
+    "@public/angular-material": "angular/bower-material#1.1.3",
+    "@public/angular-messages": "angular/bower-angular-messages#~1.5.0",
+    "@public/angular-mocks": "angular/bower-angular-mocks#~1.5.0",
+    "@public/angular-resource": "angular/bower-angular-resource#~1.5.0",
+    "@public/angular-sanitize": "angular/bower-angular-sanitize#~1.5.0",
+    "@public/angular-tooltips": "720kb/angular-tooltips#^1.0.9",
+    "@public/angular-ui-router": "angular-ui/angular-ui-router-bower#~0.2.18",
+    "@public/angularUtils-pagination": "michaelbromley/angularUtils-pagination#^0.11.1",
+    "@public/font-awesome": "FortAwesome/Font-Awesome#^4.5.0",
+    "@public/jquery": "jquery/jquery-dist#^2.2.3",
+    "@public/lodash": "lodash/lodash#^4.6.1",
+    "@public/ng-file-upload": "danialfarid/angular-file-upload-bower#~12.1.0",
+    "@public/owasp-password-strength-test": "viaforensics/owasp-password-strength-test#~1.3.0"
   },
   "devDependencies": {
     "coveralls": "~2.13.0",
