@@ -1,11 +1,11 @@
 
-# roMEANet
-
+[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/weareopensource?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
 [![Build Status](https://travis-ci.org/weareopensource/roMEANet.svg?branch=master)](https://travis-ci.org/weareopensource/roMEANet)
 [![Dependencies Status](https://david-dm.org/weareopensource/roMEANet.svg)](https://david-dm.org/weareopensource/roMEANet)
 [![Coverage Status](https://coveralls.io/repos/weareopensource/roMEANet/badge.svg?branch=master&service=github)](https://coveralls.io/github/weareopensource/roMEANet?branch=master)
 [![Known Vulnerabilities](https://snyk.io/test/github/weareopensource/romeanet/badge.svg)](https://snyk.io/test/github/weareopensource/romeanet)
 
+# roMEANet
 
 roMEANet is a full-stack Javascript open-source solution based on MEAN.js. It's just Mean.Js with an Other Design, Material, and JWT. We try to follow MeanJS on every update.
 
