@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.8.0
+version: v1.12.0
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
@@ -38,3 +38,32 @@ patch:
         patched: '2017-10-27T06:10:20.332Z'
     - gulp-nodemon > gulp > vinyl-fs > glob-watcher > gaze > globule > glob > minimatch:
         patched: '2017-10-27T06:10:20.332Z'
+  'npm:hoek:20180212':
+    - gulp-sass > node-sass > node-gyp > request > hawk > cryptiles > boom > hoek:
+        patched: '2018-06-22T02:11:35.299Z'
+    - gulp-sass > node-sass > request > hawk > hoek:
+        patched: '2018-06-22T02:11:35.299Z'
+    - gulp-sass > node-sass > request > hawk > sntp > hoek:
+        patched: '2018-06-22T02:11:35.299Z'
+    - gulp-sass > node-sass > request > hawk > cryptiles > boom > hoek:
+        patched: '2018-06-22T02:11:35.299Z'
+    - gulp-sass > node-sass > node-gyp > request > hawk > hoek:
+        patched: '2018-06-22T02:11:35.299Z'
+    - gulp-sass > node-sass > node-gyp > request > hawk > boom > hoek:
+        patched: '2018-06-22T02:11:35.299Z'
+    - gulp-sass > node-sass > node-gyp > request > hawk > sntp > hoek:
+        patched: '2018-06-22T02:11:35.299Z'
+    - gulp-sass > node-sass > request > hawk > boom > hoek:
+        patched: '2018-06-22T02:11:35.299Z'
+    - passport-jwt > jsonwebtoken > joi > hoek:
+        patched: '2018-06-22T02:11:35.299Z'
+    - passport-jwt > jsonwebtoken > joi > topo > hoek:
+        patched: '2018-06-22T02:11:35.299Z'
+    - travis-encrypt > travis-ci > request > hawk > hoek:
+        patched: '2018-06-22T02:11:35.299Z'
+    - travis-encrypt > travis-ci > request > hawk > boom > hoek:
+        patched: '2018-06-22T02:11:35.299Z'
+    - travis-encrypt > travis-ci > request > hawk > sntp > hoek:
+        patched: '2018-06-22T02:11:35.299Z'
+    - travis-encrypt > travis-ci > request > hawk > cryptiles > boom > hoek:
+        patched: '2018-06-22T02:11:35.299Z'
