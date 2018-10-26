@@ -30,7 +30,9 @@
     "seed": "gulp seed",
     "seed:prod": "gulp seed:prod",
     "seed:test": "gulp seed:test",
-    "postinstall": "node -e \"try { require('fs').symlinkSync(require('path').resolve('node_modules/@public'), 'public/lib', 'junction') } catch (e) { }\""
+    "postinstall": "node -e \"try { require('fs').symlinkSync(require('path').resolve('node_modules/@public'), 'public/lib', 'junction') } catch (e) { }\"",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "acl": "~0.4.11",
@@ -70,7 +72,7 @@
     "gulp-sass": "~3.1.0",
     "gulp-uglify": "~3.0.0",
     "helmet": "~3.8.1",
-    "imagemin-pngquant": "~5.0.0",
+    "imagemin-pngquant": "~5.1.0",
     "jasmine-core": "~2.7.0",
     "jsonwebtoken": "~7.4.1",
     "lodash": "~4.17.4",
@@ -96,7 +98,7 @@
     "read-multiple-files": "^1.1.1",
     "run-sequence": "~2.1.0",
     "serve-favicon": "^2.4.5",
-    "snyk": "^1.46.0",
+    "snyk": "^1.105.0",
     "socket.io": "~2.0.2",
     "standard-error": "^1.1.0",
     "travis-encrypt": "^2.1.1",
